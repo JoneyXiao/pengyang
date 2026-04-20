@@ -1,0 +1,13 @@
+{
+  "name": "鹏飏足球",
+  "fullName": "深圳市龙华区观湖实验学校鹏飏足球队",
+  "tagline": "友谊第一，比赛第二",
+  "description": "鹏飏足球队成立于深圳市龙华区观湖实验学校，由热爱足球的小学生组成。我们秉承「友谊第一，比赛第二」的精神，在绿茵场上追逐梦想，享受足球带来的快乐与成长。",
+  "heroImageUrl": "/images/hero-match.png",
+  "heroImageAlt": "鹏飏足球队比赛精彩瞬间",
+  "teamPhotoUrl": "/images/team-photo.jpg",
+  "teamPhotoAlt": "鹏飏足球队全体队员合影",
+  "badgeUrl": "/images/badge.png",
+  "contactAddress": "深圳市龙华区观湖实验学校",
+  "contactEmail": "pengyang@example.edu.cn"
+}

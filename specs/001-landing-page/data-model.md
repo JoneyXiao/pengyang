@@ -44,7 +44,7 @@ The Pengyang Football team's public identity shown on the landing page.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `name` | `string` | Yes | Team display name, e.g., `"鹏飏足球"` |
-| `fullName` | `string` | Yes | Full official name, e.g., `"深圳市龙华观湖实验学校鹏飏足球队"` |
+| `fullName` | `string` | Yes | Full official name, e.g., `"深圳市龙华区观湖实验学校鹏飏足球队"` |
 | `tagline` | `string` | Yes | Team tagline, e.g., `"友谊第一，比赛第二"` |
 | `description` | `string` | Yes | Brief team introduction paragraph (Chinese) |
 | `heroImageUrl` | `string \| null` | No | URL of the hero action photo (null triggers fallback) |
@@ -52,7 +52,7 @@ The Pengyang Football team's public identity shown on the landing page.
 | `teamPhotoUrl` | `string \| null` | No | URL of the team introduction photo |
 | `teamPhotoAlt` | `string` | Yes | Alt text for the team photo |
 | `badgeUrl` | `string` | Yes | URL of the team badge/crest image |
-| `contactAddress` | `string` | Yes | School address displayed in footer, e.g., `"深圳市龙华区观湖街道观湖实验学校"` |
+| `contactAddress` | `string` | Yes | School address displayed in footer, e.g., `"深圳市龙华区观湖实验学校"` |
 | `contactEmail` | `string` | Yes | General contact email displayed in footer, e.g., `"pengyang@example.edu.cn"` |
 
 **Validation rules**:
@@ -171,15 +171,15 @@ export interface NavItem {
 ```json
 {
   "name": "鹏飏足球",
-  "fullName": "深圳市龙华观湖实验学校鹏飏足球队",
+  "fullName": "深圳市龙华区观湖实验学校鹏飏足球队",
   "tagline": "友谊第一，比赛第二",
   "description": "鹏飏足球队成立于深圳市龙华区观湖实验学校，由热爱足球的小学生组成。我们秉承"友谊第一，比赛第二"的精神，在绿茵场上追逐梦想，享受足球带来的快乐与成长。",
-  "heroImageUrl": "/images/hero-match.jpg",
+  "heroImageUrl": "/images/hero-match.png",
   "heroImageAlt": "鹏飏足球队比赛精彩瞬间",
   "teamPhotoUrl": "/images/team-photo.jpg",
   "teamPhotoAlt": "鹏飏足球队全体队员合影",
   "badgeUrl": "/images/badge.png",
-  "contactAddress": "深圳市龙华区观湖街道观湖实验学校",
+  "contactAddress": "深圳市龙华区观湖实验学校",
   "contactEmail": "pengyang@example.edu.cn"
 }
 ```

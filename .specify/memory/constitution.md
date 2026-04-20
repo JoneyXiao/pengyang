@@ -20,7 +20,7 @@
   Follow-up TODOs: None
 -->
 
-# Pengyang(鹏飏) Football (深圳市龙华观湖实验学校) Constitution
+# Pengyang(鹏飏) Football (深圳市龙华区观湖实验学校) Constitution
 
 ## Core Principles
 
