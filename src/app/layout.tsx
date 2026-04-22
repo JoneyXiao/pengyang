@@ -3,8 +3,11 @@ import { Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { AuthProvider } from "@/components/auth/auth-provider";
 import { NAV_ITEMS, SITE } from "@/lib/constants/locale";
 import { getTeamProfile } from "@/lib/data/team";
+
+export const dynamic = 'force-dynamic'
 
 const notoSansSC = Noto_Sans_SC({
   subsets: ["latin"],
@@ -36,6 +39,7 @@ export default async function RootLayout({
   return (
     <html lang="zh-CN" className={`${notoSansSC.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background text-foreground" suppressHydrationWarning>
+        <AuthProvider>
         <SiteHeader navItems={[...NAV_ITEMS]} badgeUrl={profile.badgeUrl} />
         <main className="flex-1">{children}</main>
         <SiteFooter
@@ -45,6 +49,7 @@ export default async function RootLayout({
           contactAddress={profile.contactAddress}
           contactEmail={profile.contactEmail}
         />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import type { NavItem } from '@/lib/types'
 import { SITE } from '@/lib/constants/locale'
 import { MobileNavSheet } from '@/components/layout/mobile-nav-sheet'
+import { UserNav } from '@/components/layout/user-nav'
 
 interface SiteHeaderProps {
   navItems: NavItem[]
@@ -40,10 +41,12 @@ export function SiteHeader({ navItems, badgeUrl }: SiteHeaderProps) {
               {item.label}
             </Link>
           ))}
+          <UserNav />
         </nav>
 
         {/* Mobile hamburger */}
-        <div className="lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
+          <UserNav />
           <MobileNavSheet navItems={navItems} />
         </div>
       </div>

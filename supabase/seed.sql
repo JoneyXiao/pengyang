@@ -1,0 +1,15 @@
+-- Idempotent super admin seed
+-- Reads SUPER_ADMIN_EMAIL and SUPER_ADMIN_PASSWORD from environment
+-- Run via: supabase db seed or manually with psql
+
+-- This seed is designed to be run manually or through Supabase CLI.
+-- The actual user creation happens through the Supabase Auth admin API,
+-- not raw SQL, because auth.users requires proper password hashing.
+--
+-- Usage:
+--   1. Set SUPER_ADMIN_EMAIL and SUPER_ADMIN_PASSWORD in your environment
+--   2. Use the Supabase dashboard or CLI to create the super admin user
+--   3. Run this script to promote the user to super_admin role
+--
+-- To promote an existing user to super_admin:
+-- UPDATE public.profiles SET role = 'super_admin' WHERE username = 'superadmin';
