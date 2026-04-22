@@ -1,11 +1,8 @@
 {
   "mcpServers": {
-    "shadcn": {
-      "command": "npx",
-      "args": [
-        "shadcn@latest",
-        "mcp"
-      ]
+    "supabase-pengyang": {
+      "url": "https://mcp.supabase.com/mcp?project_ref=lkljrnbtedjnswmbxhij",
+      "headers": {}
     }
   }
 }
