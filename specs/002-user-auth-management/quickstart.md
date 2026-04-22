@@ -25,9 +25,14 @@ Create or update `.env.local`:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SERVER_ACTIONS_ALLOWED_ORIGINS=pengyang.zh-cn.edgeone.cool
 SUPER_ADMIN_EMAIL=admin@example.com
 SUPER_ADMIN_PASSWORD=your-secure-password
 ```
+
+For EdgeOne Pages or any reverse-proxy deployment, set `SERVER_ACTIONS_ALLOWED_ORIGINS`
+to the public hostnames that browsers submit forms from. Use a comma-separated list if
+you serve multiple domains.
 
 ### 3. Initialize Supabase locally (optional for local dev)
 
