@@ -1,10 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { updateSession } from '@/lib/supabase/proxy'
+import { updateSession } from '@/lib/supabase/middleware'
 
 const publicRoutes = ['/login', '/register', '/auth/callback']
 const adminRoutes = ['/admin']
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Skip static assets
@@ -56,7 +56,7 @@ export async function proxy(request: NextRequest) {
   return response
 }
 
-export const proxyConfig = {
+export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
