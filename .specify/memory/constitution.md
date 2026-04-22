@@ -1,22 +1,26 @@
 <!--
   Sync Impact Report
   ===================
-  Version change: N/A → 1.0.0 (initial adoption)
-  Modified principles: N/A (first version)
-  Added sections:
-    - Core Principles (4 principles: Code Quality, Testing Standards,
-      User Experience Consistency, Performance Requirements)
-    - Technology Stack & Constraints
-    - Development Workflow & Quality Gates
-    - Governance
-  Removed sections: N/A
+  Version change: 1.0.0 → 1.1.0 (MINOR — technology stack change)
+  Modified principles:
+    - II. Testing Standards: updated mocked backend reference
+      (EdgeOne KV → Supabase)
+    - IV. Performance Requirements: updated dynamic data caching
+      reference (EdgeOne KV → Supabase)
+  Added sections: None
+  Removed sections: None
+  Technology stack changes:
+    - Authentication: NextAuth.js → Supabase Auth (free plan)
+    - Structured data storage: EdgeOne KV → Supabase Database (free plan)
+    - Node.js Runtime note updated: Edge Runtime remains default;
+      Node.js only for non-Edge-compatible APIs (e.g., sharp)
   Templates requiring updates:
     - .specify/templates/plan-template.md ✅ no update needed
       (Constitution Check is dynamically resolved at plan time)
     - .specify/templates/spec-template.md ✅ no update needed
-      (generic template, compatible with new principles)
+      (generic template, compatible with updated principles)
     - .specify/templates/tasks-template.md ✅ no update needed
-      (generic template, compatible with new principles)
+      (generic template, compatible with updated principles)
   Follow-up TODOs: None
 -->
 
@@ -57,7 +61,7 @@ Tests MUST be runnable in CI without external service dependencies.
   and business logic (e.g., match scheduling validation, score
   formatting).
 - Integration tests MUST cover API route handlers end-to-end using
-  mocked storage backends (EdgeOne KV, Tencent Cloud COS).
+  mocked storage backends (Supabase, Tencent Cloud COS).
 - Component tests MUST verify that interactive UI elements (forms,
   modals, navigation) render correctly and respond to user events.
 - Tests MUST NOT depend on network access, real databases, or
@@ -121,7 +125,7 @@ budgets are enforced, not aspirational.
 - Static and infrequently changing pages (homepage, team intro,
   coach/player profiles) MUST leverage ISR or static generation.
   Dynamic data (live match updates) MUST use client-side fetching
-  with appropriate cache headers via EdgeOne KV.
+  or server-side Supabase queries with appropriate cache headers.
 - Third-party scripts (analytics, video embeds) MUST be loaded
   with `next/script` strategy `lazyOnload` or `afterInteractive`
   to avoid blocking first paint.
@@ -135,18 +139,25 @@ affect engagement and the ability to follow live match updates.
 - **Framework**: Next.js (App Router) — serves frontend, admin
   backend, and API routes in a single deployment unit.
 - **UI Library**: shadcn/ui + Tailwind CSS for all components.
-- **Authentication**: NextAuth.js for admin login. Public pages
-  MUST NOT require authentication.
-- **Storage**: EdgeOne KV for structured data (matches, team info,
-  real-time updates). Tencent Cloud COS for binary assets (photos,
-  uploaded media).
+- **Authentication**: Supabase Auth (free plan) for admin login,
+  using `@supabase/ssr` for SSR-compatible session management via
+  HTTP-only cookies. Public pages MUST NOT require authentication.
+  Environment variables `NEXT_PUBLIC_SUPABASE_URL` and
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY` MUST be configured in deployment.
+- **Storage**: Supabase Database (free plan, PostgreSQL) for
+  structured data (matches, team info, real-time updates).
+  Tencent Cloud COS for binary assets (photos, uploaded media).
+  Row-Level Security (RLS) MUST be enabled on all Supabase tables;
+  disabling RLS is prohibited.
 - **Video**: Embedded players from Tencent Video or Bilibili. No
   self-hosted video streaming.
 - **Deployment**: EdgeOne Pages. All builds MUST pass linting,
   type-checking, and tests before deployment.
 - **Node.js Runtime**: MUST target the Edge Runtime where possible
-  for API routes. Node.js runtime is permitted only when Edge
-  Runtime APIs are insufficient (e.g., sharp for image processing).
+  for API routes, including routes that use `supabase-js` and
+  `@supabase/ssr` (both are Edge-compatible). Node.js runtime is
+  permitted only when Edge Runtime APIs are insufficient (e.g.,
+  `sharp` for image processing).
 - **Dependencies**: New runtime dependencies MUST be justified in
   the PR description. Prefer platform APIs and built-in Next.js
   features over third-party packages.
@@ -186,4 +197,4 @@ principles when resolving disputes.
   MUST be filled with gates derived from these principles. Violations
   MUST be explicitly justified in the Complexity Tracking table.
 
-**Version**: 1.0.0 | **Ratified**: 2026-04-19 | **Last Amended**: 2026-04-19
+**Version**: 1.1.0 | **Ratified**: 2026-04-19 | **Last Amended**: 2026-04-22
