@@ -42,7 +42,7 @@ export const columns: ColumnDef<UserTableData>[] = [
     accessorKey: "is_superuser",
     header: "角色",
     cell: ({ row }) => (
-      <Badge variant={row.original.is_superuser ? "default" : "secondary"}>
+      <Badge variant={row.original.is_superuser ? "default" : "outline"}>
         {row.original.is_superuser ? "超级管理员" : "普通用户"}
       </Badge>
     ),

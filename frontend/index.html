@@ -10,6 +10,36 @@
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
   </head>
   <body>
+    <div id="browser-warning" style="display:none;position:fixed;inset:0;z-index:99999;background:#0a0a0a;color:#e5e5e5;font-family:system-ui,-apple-system,sans-serif;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem">
+      <div style="max-width:480px">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 1.5rem"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <h1 style="font-size:1.5rem;font-weight:700;margin:0 0 .75rem">请更新浏览器</h1>
+        <p style="font-size:1rem;margin:0 0 .5rem;color:#a3a3a3">浏览器版本过低，无法正常运行本应用。</p>
+        <p style="font-size:.875rem;margin:0 0 1.5rem;color:#a3a3a3">Your browser is outdated and cannot run this application. Please upgrade to a recent version of one of the following browsers:</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+          <a href="https://www.quark.cn/" target="_blank" rel="noopener" style="color:#60a5fa;text-decoration:underline;font-size:.875rem">夸克浏览器</a>
+          <a href="https://www.google.com/chrome/" target="_blank" rel="noopener" style="color:#60a5fa;text-decoration:underline;font-size:.875rem">Chrome</a>
+          <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener" style="color:#60a5fa;text-decoration:underline;font-size:.875rem">Firefox</a>
+          <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener" style="color:#60a5fa;text-decoration:underline;font-size:.875rem">Edge</a>
+          <a href="https://www.apple.com/safari/" target="_blank" rel="noopener" style="color:#60a5fa;text-decoration:underline;font-size:.875rem">Safari</a>
+        </div>
+      </div>
+    </div>
+
+    <script nomodule>
+      document.getElementById("browser-warning").style.display = "flex";
+    </script>
+
+    <script type="module">
+      try {
+        if (typeof globalThis === "undefined" || typeof CSS === "undefined" || !CSS.supports("selector(&)")) {
+          throw 0;
+        }
+      } catch (e) {
+        document.getElementById("browser-warning").style.display = "flex";
+      }
+    </script>
+
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
   </body>
