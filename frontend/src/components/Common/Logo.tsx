@@ -1,54 +1,61 @@
 import { Link } from "@tanstack/react-router"
 
-import { useTheme } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import icon from "/assets/images/fastapi-icon.svg"
-import iconLight from "/assets/images/fastapi-icon-light.svg"
-import logo from "/assets/images/fastapi-logo.svg"
-import logoLight from "/assets/images/fastapi-logo-light.svg"
+import badge from "/assets/images/badge.png"
 
 interface LogoProps {
   variant?: "full" | "icon" | "responsive"
   className?: string
   asLink?: boolean
+  forceLight?: boolean
 }
 
 export function Logo({
   variant = "full",
   className,
   asLink = true,
+  forceLight = false,
 }: LogoProps) {
-  const { resolvedTheme } = useTheme()
-  const isDark = resolvedTheme === "dark"
-
-  const fullLogo = isDark ? logoLight : logo
-  const iconLogo = isDark ? iconLight : icon
+  const badgeClassName = cn(
+    "shrink-0 object-contain",
+    forceLight && "drop-shadow-[0_0_16px_rgba(255,255,255,0.2)]",
+    className,
+  )
 
   const content =
     variant === "responsive" ? (
       <>
         <img
-          src={fullLogo}
-          alt="FastAPI"
+          src={badge}
+          alt="鹏飏"
+          width={48}
+          height={48}
           className={cn(
-            "h-6 w-auto group-data-[collapsible=icon]:hidden",
-            className,
+            "size-12 group-data-[collapsible=icon]:hidden",
+            badgeClassName,
           )}
         />
         <img
-          src={iconLogo}
-          alt="FastAPI"
+          src={badge}
+          alt="鹏飏"
+          width={36}
+          height={36}
           className={cn(
-            "size-5 hidden group-data-[collapsible=icon]:block",
-            className,
+            "hidden size-9 group-data-[collapsible=icon]:block",
+            badgeClassName,
           )}
         />
       </>
     ) : (
       <img
-        src={variant === "full" ? fullLogo : iconLogo}
-        alt="FastAPI"
-        className={cn(variant === "full" ? "h-6 w-auto" : "size-5", className)}
+        src={badge}
+        alt="鹏飏"
+        width={variant === "full" ? 64 : 36}
+        height={variant === "full" ? 64 : 36}
+        className={cn(
+          variant === "full" ? "size-16" : "size-9",
+          badgeClassName,
+        )}
       />
     )
 
