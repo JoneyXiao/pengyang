@@ -30,42 +30,32 @@ export function MatchTimeline({ matchId, isLive = false }: MatchTimelineProps) {
 
   if (updates.length === 0) {
     return (
-      <p
-        className="text-sm text-[#707072]"
-        style={{ fontFamily: "Inter, sans-serif" }}
-      >
-        {isLive ? "等待比赛动态..." : "暂无比赛动态"}
-      </p>
+      <div className="rounded-lg border border-dashed border-[#E5E5E5] px-4 py-8 text-center">
+        <p className="font-body text-sm text-[#707072]">
+          {isLive ? "等待比赛动态..." : "暂无比赛动态"}
+        </p>
+      </div>
     )
   }
 
   return (
     <div className="relative space-y-0">
-      {/* Timeline line */}
-      <div className="absolute left-[5px] top-2 bottom-2 w-px bg-[#E5E5E5]" />
+      <div className="absolute bottom-2 left-[5px] top-2 w-px bg-[#E5E5E5]" />
 
       {updates.map((update, idx) => (
-        <div key={update.id} className="relative flex gap-4 pb-4">
-          {/* Dot */}
+        <div key={update.id} className="relative flex gap-4 pb-5">
           <div
-            className={`relative z-10 mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 ${
+            className={`relative z-10 mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 transition-colors ${
               idx === 0 && isLive
                 ? "border-[#FA5400] bg-[#FA5400]"
                 : "border-[#E5E5E5] bg-white"
             }`}
           />
-          {/* Content */}
           <div className="min-w-0 flex-1">
-            <p
-              className="text-sm leading-relaxed"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
+            <p className="font-body text-sm leading-relaxed text-[#111111]">
               {update.content}
             </p>
-            <time
-              className="mt-1 block text-xs text-[#707072]"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
+            <time className="mt-1 block font-body text-xs text-[#707072]">
               {new Date(update.created_at).toLocaleTimeString("zh-CN", {
                 hour: "2-digit",
                 minute: "2-digit",

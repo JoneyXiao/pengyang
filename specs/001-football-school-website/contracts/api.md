@@ -37,7 +37,7 @@ Landing page aggregate data.
       "away_score": 1
     }
   ],
-  "team_name": "深圳市龙华区观湖实验学校足球队"
+  "team_name": "深圳市龙华区观湖实验学校 - 鹏飏"
 }
 ```
 

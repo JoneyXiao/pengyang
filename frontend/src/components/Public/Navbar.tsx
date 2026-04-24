@@ -1,61 +1,89 @@
 import { Link, useLocation } from "@tanstack/react-router"
-import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { Menu, User, X } from "lucide-react"
+import { useEffect, useState } from "react"
 import { isLoggedIn } from "@/hooks/useAuth"
 
 const navLinks = [
   { to: "/", label: "首页" },
   { to: "/team", label: "球队介绍" },
-  { to: "/roster", label: "教练与球员" },
-  { to: "/matches", label: "比赛日程" },
+  { to: "/roster", label: "阵容" },
+  { to: "/matches", label: "比赛" },
 ] as const
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const loggedIn = isLoggedIn()
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : ""
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileOpen])
+
+  const isActive = (to: string) =>
+    to === "/" ? location.pathname === "/" : location.pathname.startsWith(to)
+
   return (
-    <nav className="sticky top-0 z-50 bg-[#111111] text-white">
+    <nav
+      className={`sticky top-0 z-50 border-b-2 border-[#111111] bg-white/95 backdrop-blur-md transition-shadow duration-200 ${
+        scrolled ? "shadow-[0_2px_4px_rgba(0,0,0,0.05)]" : ""
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8">
-        <Link to="/" className="flex items-center gap-2">
+        {/* Logo */}
+        <Link to="/" className="flex shrink-0 items-center gap-2">
           <span
-            className="text-lg font-bold tracking-tight"
-            style={{ fontFamily: "Jost, sans-serif", fontWeight: 900 }}
+            className="font-display text-lg italic tracking-tight text-[#111111]"
+            style={{ fontWeight: 900 }}
           >
-            鹏飏足球
+            深圳市龙华区观湖实验学校 - 鹏飏
           </span>
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop nav links - centered */}
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`text-sm font-medium tracking-wide transition-colors hover:text-white ${
-                location.pathname === link.to
-                  ? "text-white underline underline-offset-4 decoration-2"
-                  : "text-white/80"
+              className={`relative py-1 font-body text-sm tracking-wide transition-colors ${
+                isActive(link.to)
+                  ? "font-semibold text-[#111111]"
+                  : "font-medium text-[#707072] hover:text-[#111111]"
               }`}
-              style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
             >
               {link.label}
+              {isActive(link.to) && (
+                <span className="absolute -bottom-[19px] left-0 right-0 h-0.5 bg-[#111111]" />
+              )}
             </Link>
           ))}
+        </div>
+
+        {/* Desktop right side */}
+        <div className="hidden items-center gap-3 md:flex">
           <Link
             to={loggedIn ? "/dashboard" : "/login"}
-            className="rounded bg-[#FA5400] px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-[#e04d00]"
-            style={{ fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E5E5E5] text-[#111111] transition-colors hover:bg-[#F5F5F5]"
+            aria-label={loggedIn ? "进入管理" : "登录"}
           >
-            {loggedIn ? "进入管理" : "登录"}
+            <User size={18} />
           </Link>
         </div>
 
         {/* Mobile toggle */}
         <button
           type="button"
-          className="md:hidden p-2"
+          className="flex h-11 w-11 items-center justify-center text-[#111111] md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "关闭菜单" : "打开菜单"}
         >
@@ -63,18 +91,25 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="border-t border-white/10 px-4 pb-4 md:hidden">
+      {/* Mobile full-screen overlay */}
+      <div
+        className={`fixed inset-0 top-[66px] z-40 bg-white transition-all duration-200 ease-out md:hidden ${
+          mobileOpen
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-2 opacity-0"
+        }`}
+      >
+        <div className="flex h-full flex-col px-6 pt-6">
           {navLinks.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`block py-3 text-sm font-medium ${
-                location.pathname === link.to
-                  ? "text-white font-semibold"
-                  : "text-white/80"
+              className={`border-b border-[#E5E5E5] py-4 font-display text-2xl uppercase tracking-tight ${
+                isActive(link.to)
+                  ? "font-bold text-[#111111]"
+                  : "font-bold text-[#707072]"
               }`}
+              style={{ fontWeight: 900 }}
               onClick={() => setMobileOpen(false)}
             >
               {link.label}
@@ -82,13 +117,13 @@ export function Navbar() {
           ))}
           <Link
             to={loggedIn ? "/dashboard" : "/login"}
-            className="mt-2 block rounded bg-[#FA5400] px-4 py-2 text-center text-sm font-medium text-white"
+            className="mt-8 flex h-12 items-center justify-center rounded-[30px] bg-[#111111] font-body text-sm font-medium text-white transition-colors hover:bg-[#292929]"
             onClick={() => setMobileOpen(false)}
           >
             {loggedIn ? "进入管理" : "登录"}
           </Link>
         </div>
-      )}
+      </div>
     </nav>
   )
 }

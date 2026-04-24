@@ -32,7 +32,7 @@ def get_landing_page(session: SessionDep) -> Any:
     return LandingPageData(
         upcoming_matches=[MatchPublic.model_validate(m) for m in upcoming],
         recent_matches=[MatchPublic.model_validate(m) for m in recent],
-        team_name="深圳市龙华区观湖实验学校足球队",
+        team_name="深圳市龙华区观湖实验学校 - 鹏飏",
     )
 
 

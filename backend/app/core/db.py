@@ -36,7 +36,7 @@ def init_db(session: Session) -> None:
     tc = session.exec(select(TeamContent)).first()
     if not tc:
         tc = TeamContent(
-            content="<h2>球队介绍</h2><p>欢迎来到深圳市龙华区观湖实验学校足球队主页。</p>",
+            content="<h2>球队介绍</h2><p>欢迎来到深圳市龙华区观湖实验学校 - 鹏飏。</p>",
             updated_by_id=user.id,
         )
         session.add(tc)
