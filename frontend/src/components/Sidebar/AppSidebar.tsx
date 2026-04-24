@@ -1,4 +1,12 @@
-import { Briefcase, Home, Users } from "lucide-react"
+import {
+  Briefcase,
+  ExternalLink,
+  Home,
+  Shield,
+  Swords,
+  Trophy,
+  Users,
+} from "lucide-react"
 
 import { SidebarAppearance } from "@/components/Common/Appearance"
 import { Logo } from "@/components/Common/Logo"
@@ -13,15 +21,26 @@ import { type Item, Main } from "./Main"
 import { User } from "./User"
 
 const baseItems: Item[] = [
-  { icon: Home, title: "仪表盘", path: "/" },
+  { icon: Home, title: "仪表盘", path: "/dashboard" },
   { icon: Briefcase, title: "项目", path: "/items" },
+]
+
+const footballItems: Item[] = [
+  { icon: Shield, title: "球队介绍", path: "/team-content" },
+  { icon: Users, title: "教练管理", path: "/coaches" },
+  { icon: Users, title: "球员管理", path: "/players" },
+  { icon: Swords, title: "比赛管理", path: "/match-management" },
 ]
 
 export function AppSidebar() {
   const { user: currentUser } = useAuth()
 
   const items = currentUser?.is_superuser
-    ? [...baseItems, { icon: Users, title: "管理员", path: "/admin" }]
+    ? [
+        ...baseItems,
+        ...footballItems,
+        { icon: Trophy, title: "管理员", path: "/admin" },
+      ]
     : baseItems
 
   return (
@@ -31,6 +50,17 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <Main items={items} />
+        <div className="mt-auto px-3 py-2">
+          <a
+            href="/"
+            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            <ExternalLink className="size-4" />
+            <span className="group-data-[collapsible=icon]:hidden">
+              查看网站
+            </span>
+          </a>
+        </div>
       </SidebarContent>
       <SidebarFooter>
         <SidebarAppearance />

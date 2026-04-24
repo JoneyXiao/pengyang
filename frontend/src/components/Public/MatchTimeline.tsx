@@ -1,0 +1,79 @@
+import { useQuery } from "@tanstack/react-query"
+import { PublicService } from "@/client"
+
+interface MatchTimelineProps {
+  matchId: string
+  isLive?: boolean
+}
+
+export function MatchTimeline({ matchId, isLive = false }: MatchTimelineProps) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["match-updates", matchId],
+    queryFn: () => PublicService.getMatchUpdates({ matchId }),
+    refetchInterval: isLive ? 5000 : false,
+  })
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="flex gap-3">
+            <div className="h-3 w-3 shrink-0 animate-pulse rounded-full bg-[#E5E5E5]" />
+            <div className="h-12 w-full animate-pulse rounded bg-[#F5F5F5]" />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const updates = data?.data ?? []
+
+  if (updates.length === 0) {
+    return (
+      <p
+        className="text-sm text-[#707072]"
+        style={{ fontFamily: "Inter, sans-serif" }}
+      >
+        {isLive ? "等待比赛动态..." : "暂无比赛动态"}
+      </p>
+    )
+  }
+
+  return (
+    <div className="relative space-y-0">
+      {/* Timeline line */}
+      <div className="absolute left-[5px] top-2 bottom-2 w-px bg-[#E5E5E5]" />
+
+      {updates.map((update, idx) => (
+        <div key={update.id} className="relative flex gap-4 pb-4">
+          {/* Dot */}
+          <div
+            className={`relative z-10 mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 ${
+              idx === 0 && isLive
+                ? "border-[#FA5400] bg-[#FA5400]"
+                : "border-[#E5E5E5] bg-white"
+            }`}
+          />
+          {/* Content */}
+          <div className="min-w-0 flex-1">
+            <p
+              className="text-sm leading-relaxed"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              {update.content}
+            </p>
+            <time
+              className="mt-1 block text-xs text-[#707072]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              {new Date(update.created_at).toLocaleTimeString("zh-CN", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </time>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}

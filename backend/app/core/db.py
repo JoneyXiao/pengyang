@@ -2,7 +2,7 @@ from sqlmodel import Session, create_engine, select
 
 from app import crud
 from app.core.config import settings
-from app.models import User, UserCreate
+from app.models import TeamContent, User, UserCreate
 
 engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
@@ -31,3 +31,13 @@ def init_db(session: Session) -> None:
             is_superuser=True,
         )
         user = crud.create_user(session=session, user_create=user_in)
+
+    # Seed TeamContent singleton if not exists
+    tc = session.exec(select(TeamContent)).first()
+    if not tc:
+        tc = TeamContent(
+            content="<h2>球队介绍</h2><p>欢迎来到深圳市龙华区观湖实验学校足球队主页。</p>",
+            updated_by_id=user.id,
+        )
+        session.add(tc)
+        session.commit()

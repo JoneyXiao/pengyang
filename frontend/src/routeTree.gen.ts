@@ -13,11 +13,22 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RecoverPasswordRouteImport } from './routes/recover-password'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PublicRouteImport } from './routes/_public'
 import { Route as LayoutRouteImport } from './routes/_layout'
-import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as PublicIndexRouteImport } from './routes/_public/index'
+import { Route as PublicTeamRouteImport } from './routes/_public/team'
+import { Route as PublicRosterRouteImport } from './routes/_public/roster'
+import { Route as PublicMatchesRouteImport } from './routes/_public/matches'
+import { Route as LayoutTeamContentRouteImport } from './routes/_layout/team-content'
 import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
+import { Route as LayoutPlayersRouteImport } from './routes/_layout/players'
+import { Route as LayoutMatchManagementRouteImport } from './routes/_layout/match-management'
 import { Route as LayoutItemsRouteImport } from './routes/_layout/items'
+import { Route as LayoutDashboardRouteImport } from './routes/_layout/dashboard'
+import { Route as LayoutCoachesRouteImport } from './routes/_layout/coaches'
 import { Route as LayoutAdminRouteImport } from './routes/_layout/admin'
+import { Route as PublicMatchesIndexRouteImport } from './routes/_public/matches.index'
+import { Route as PublicMatchesMatchIdRouteImport } from './routes/_public/matches.$matchId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -39,13 +50,37 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LayoutIndexRoute = LayoutIndexRouteImport.update({
+const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicTeamRoute = PublicTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicRosterRoute = PublicRosterRouteImport.update({
+  id: '/roster',
+  path: '/roster',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicMatchesRoute = PublicMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => PublicRoute,
+} as any)
+const LayoutTeamContentRoute = LayoutTeamContentRouteImport.update({
+  id: '/team-content',
+  path: '/team-content',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
@@ -53,9 +88,29 @@ const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutPlayersRoute = LayoutPlayersRouteImport.update({
+  id: '/players',
+  path: '/players',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutMatchManagementRoute = LayoutMatchManagementRouteImport.update({
+  id: '/match-management',
+  path: '/match-management',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutItemsRoute = LayoutItemsRouteImport.update({
   id: '/items',
   path: '/items',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutDashboardRoute = LayoutDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCoachesRoute = LayoutCoachesRouteImport.update({
+  id: '/coaches',
+  path: '/coaches',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutAdminRoute = LayoutAdminRouteImport.update({
@@ -63,38 +118,78 @@ const LayoutAdminRoute = LayoutAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => LayoutRoute,
 } as any)
+const PublicMatchesIndexRoute = PublicMatchesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PublicMatchesRoute,
+} as any)
+const PublicMatchesMatchIdRoute = PublicMatchesMatchIdRouteImport.update({
+  id: '/$matchId',
+  path: '/$matchId',
+  getParentRoute: () => PublicMatchesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof LayoutIndexRoute
+  '/': typeof PublicIndexRoute
   '/login': typeof LoginRoute
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
+  '/coaches': typeof LayoutCoachesRoute
+  '/dashboard': typeof LayoutDashboardRoute
   '/items': typeof LayoutItemsRoute
+  '/match-management': typeof LayoutMatchManagementRoute
+  '/players': typeof LayoutPlayersRoute
   '/settings': typeof LayoutSettingsRoute
+  '/team-content': typeof LayoutTeamContentRoute
+  '/matches': typeof PublicMatchesRouteWithChildren
+  '/roster': typeof PublicRosterRoute
+  '/team': typeof PublicTeamRoute
+  '/matches/$matchId': typeof PublicMatchesMatchIdRoute
+  '/matches/': typeof PublicMatchesIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof PublicIndexRoute
   '/login': typeof LoginRoute
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
+  '/coaches': typeof LayoutCoachesRoute
+  '/dashboard': typeof LayoutDashboardRoute
   '/items': typeof LayoutItemsRoute
+  '/match-management': typeof LayoutMatchManagementRoute
+  '/players': typeof LayoutPlayersRoute
   '/settings': typeof LayoutSettingsRoute
-  '/': typeof LayoutIndexRoute
+  '/team-content': typeof LayoutTeamContentRoute
+  '/roster': typeof PublicRosterRoute
+  '/team': typeof PublicTeamRoute
+  '/matches/$matchId': typeof PublicMatchesMatchIdRoute
+  '/matches': typeof PublicMatchesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
+  '/_public': typeof PublicRouteWithChildren
   '/login': typeof LoginRoute
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/_layout/admin': typeof LayoutAdminRoute
+  '/_layout/coaches': typeof LayoutCoachesRoute
+  '/_layout/dashboard': typeof LayoutDashboardRoute
   '/_layout/items': typeof LayoutItemsRoute
+  '/_layout/match-management': typeof LayoutMatchManagementRoute
+  '/_layout/players': typeof LayoutPlayersRoute
   '/_layout/settings': typeof LayoutSettingsRoute
-  '/_layout/': typeof LayoutIndexRoute
+  '/_layout/team-content': typeof LayoutTeamContentRoute
+  '/_public/matches': typeof PublicMatchesRouteWithChildren
+  '/_public/roster': typeof PublicRosterRoute
+  '/_public/team': typeof PublicTeamRoute
+  '/_public/': typeof PublicIndexRoute
+  '/_public/matches/$matchId': typeof PublicMatchesMatchIdRoute
+  '/_public/matches/': typeof PublicMatchesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,33 +200,64 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/admin'
+    | '/coaches'
+    | '/dashboard'
     | '/items'
+    | '/match-management'
+    | '/players'
     | '/settings'
+    | '/team-content'
+    | '/matches'
+    | '/roster'
+    | '/team'
+    | '/matches/$matchId'
+    | '/matches/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/login'
     | '/recover-password'
     | '/reset-password'
     | '/signup'
     | '/admin'
+    | '/coaches'
+    | '/dashboard'
     | '/items'
+    | '/match-management'
+    | '/players'
     | '/settings'
-    | '/'
+    | '/team-content'
+    | '/roster'
+    | '/team'
+    | '/matches/$matchId'
+    | '/matches'
   id:
     | '__root__'
     | '/_layout'
+    | '/_public'
     | '/login'
     | '/recover-password'
     | '/reset-password'
     | '/signup'
     | '/_layout/admin'
+    | '/_layout/coaches'
+    | '/_layout/dashboard'
     | '/_layout/items'
+    | '/_layout/match-management'
+    | '/_layout/players'
     | '/_layout/settings'
-    | '/_layout/'
+    | '/_layout/team-content'
+    | '/_public/matches'
+    | '/_public/roster'
+    | '/_public/team'
+    | '/_public/'
+    | '/_public/matches/$matchId'
+    | '/_public/matches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   LayoutRoute: typeof LayoutRouteWithChildren
+  PublicRoute: typeof PublicRouteWithChildren
   LoginRoute: typeof LoginRoute
   RecoverPasswordRoute: typeof RecoverPasswordRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -168,6 +294,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_layout': {
       id: '/_layout'
       path: ''
@@ -175,11 +308,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_layout/': {
-      id: '/_layout/'
+    '/_public/': {
+      id: '/_public/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexRouteImport
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/team': {
+      id: '/_public/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof PublicTeamRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/roster': {
+      id: '/_public/roster'
+      path: '/roster'
+      fullPath: '/roster'
+      preLoaderRoute: typeof PublicRosterRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/matches': {
+      id: '/_public/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof PublicMatchesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_layout/team-content': {
+      id: '/_layout/team-content'
+      path: '/team-content'
+      fullPath: '/team-content'
+      preLoaderRoute: typeof LayoutTeamContentRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/settings': {
@@ -189,11 +350,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutSettingsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/players': {
+      id: '/_layout/players'
+      path: '/players'
+      fullPath: '/players'
+      preLoaderRoute: typeof LayoutPlayersRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/match-management': {
+      id: '/_layout/match-management'
+      path: '/match-management'
+      fullPath: '/match-management'
+      preLoaderRoute: typeof LayoutMatchManagementRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/items': {
       id: '/_layout/items'
       path: '/items'
       fullPath: '/items'
       preLoaderRoute: typeof LayoutItemsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/dashboard': {
+      id: '/_layout/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof LayoutDashboardRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/coaches': {
+      id: '/_layout/coaches'
+      path: '/coaches'
+      fullPath: '/coaches'
+      preLoaderRoute: typeof LayoutCoachesRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/admin': {
@@ -203,28 +392,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAdminRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_public/matches/': {
+      id: '/_public/matches/'
+      path: '/'
+      fullPath: '/matches/'
+      preLoaderRoute: typeof PublicMatchesIndexRouteImport
+      parentRoute: typeof PublicMatchesRoute
+    }
+    '/_public/matches/$matchId': {
+      id: '/_public/matches/$matchId'
+      path: '/$matchId'
+      fullPath: '/matches/$matchId'
+      preLoaderRoute: typeof PublicMatchesMatchIdRouteImport
+      parentRoute: typeof PublicMatchesRoute
+    }
   }
 }
 
 interface LayoutRouteChildren {
   LayoutAdminRoute: typeof LayoutAdminRoute
+  LayoutCoachesRoute: typeof LayoutCoachesRoute
+  LayoutDashboardRoute: typeof LayoutDashboardRoute
   LayoutItemsRoute: typeof LayoutItemsRoute
+  LayoutMatchManagementRoute: typeof LayoutMatchManagementRoute
+  LayoutPlayersRoute: typeof LayoutPlayersRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
-  LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutTeamContentRoute: typeof LayoutTeamContentRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAdminRoute: LayoutAdminRoute,
+  LayoutCoachesRoute: LayoutCoachesRoute,
+  LayoutDashboardRoute: LayoutDashboardRoute,
   LayoutItemsRoute: LayoutItemsRoute,
+  LayoutMatchManagementRoute: LayoutMatchManagementRoute,
+  LayoutPlayersRoute: LayoutPlayersRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
-  LayoutIndexRoute: LayoutIndexRoute,
+  LayoutTeamContentRoute: LayoutTeamContentRoute,
 }
 
 const LayoutRouteWithChildren =
   LayoutRoute._addFileChildren(LayoutRouteChildren)
 
+interface PublicMatchesRouteChildren {
+  PublicMatchesMatchIdRoute: typeof PublicMatchesMatchIdRoute
+  PublicMatchesIndexRoute: typeof PublicMatchesIndexRoute
+}
+
+const PublicMatchesRouteChildren: PublicMatchesRouteChildren = {
+  PublicMatchesMatchIdRoute: PublicMatchesMatchIdRoute,
+  PublicMatchesIndexRoute: PublicMatchesIndexRoute,
+}
+
+const PublicMatchesRouteWithChildren = PublicMatchesRoute._addFileChildren(
+  PublicMatchesRouteChildren,
+)
+
+interface PublicRouteChildren {
+  PublicMatchesRoute: typeof PublicMatchesRouteWithChildren
+  PublicRosterRoute: typeof PublicRosterRoute
+  PublicTeamRoute: typeof PublicTeamRoute
+  PublicIndexRoute: typeof PublicIndexRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicMatchesRoute: PublicMatchesRouteWithChildren,
+  PublicRosterRoute: PublicRosterRoute,
+  PublicTeamRoute: PublicTeamRoute,
+  PublicIndexRoute: PublicIndexRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   LayoutRoute: LayoutRouteWithChildren,
+  PublicRoute: PublicRouteWithChildren,
   LoginRoute: LoginRoute,
   RecoverPasswordRoute: RecoverPasswordRoute,
   ResetPasswordRoute: ResetPasswordRoute,

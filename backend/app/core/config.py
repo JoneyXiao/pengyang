@@ -91,6 +91,11 @@ class Settings(BaseSettings):
         return bool(self.SMTP_HOST and self.EMAILS_FROM_EMAIL)
 
     EMAIL_TEST_USER: EmailStr = "test@example.com"
+    # Photo uploads
+    UPLOAD_DIR: str = "uploads"
+    UPLOAD_MAX_SIZE_MB: int = 10
+    UPLOAD_ALLOWED_TYPES: list[str] = ["image/jpeg", "image/png", "image/webp"]
+
     FIRST_SUPERUSER: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
 

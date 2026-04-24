@@ -66,8 +66,8 @@ const DeleteUser = ({ id, onSuccess }: DeleteUserProps) => {
           <DialogHeader>
             <DialogTitle>删除用户</DialogTitle>
             <DialogDescription>
-              与该用户关联的所有项目也将被{" "}
-              <strong>永久删除。</strong> 确定吗？此操作无法撤销。
+              与该用户关联的所有项目也将被 <strong>永久删除。</strong>{" "}
+              确定吗？此操作无法撤销。
             </DialogDescription>
           </DialogHeader>
 

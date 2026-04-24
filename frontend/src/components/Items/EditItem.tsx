@@ -89,9 +89,7 @@ const EditItem = ({ item, onSuccess }: EditItemProps) => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
               <DialogTitle>编辑项目</DialogTitle>
-              <DialogDescription>
-                在下方更新项目详细信息。
-              </DialogDescription>
+              <DialogDescription>在下方更新项目详细信息。</DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <FormField

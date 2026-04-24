@@ -46,76 +46,76 @@
 }
 
 :root {
-  --font-display: 'Jost', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-code: 'JetBrains Mono', monospace;
+  --font-display: "Jost", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-code: "JetBrains Mono", monospace;
 
   --radius: 8px;
-  --background: #FFFFFF;
+  --background: #ffffff;
   --foreground: #111111;
-  --card: #F5F5F5;
+  --card: #f5f5f5;
   --card-foreground: #111111;
-  --popover: #FFFFFF;
+  --popover: #ffffff;
   --popover-foreground: #111111;
   --primary: #111111;
-  --primary-foreground: #FFFFFF;
-  --secondary: #FA5400;
-  --secondary-foreground: #FFFFFF;
-  --muted: #F5F5F5;
+  --primary-foreground: #ffffff;
+  --secondary: #fa5400;
+  --secondary-foreground: #ffffff;
+  --muted: #f5f5f5;
   --muted-foreground: #707072;
-  --accent: #FA5400;
-  --accent-foreground: #FFFFFF;
-  --destructive: #D43F21;
-  --border: #E5E5E5;
-  --input: #E5E5E5;
+  --accent: #fa5400;
+  --accent-foreground: #ffffff;
+  --destructive: #d43f21;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
   --ring: #111111;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: #FFFFFF;
+  --sidebar: #ffffff;
   --sidebar-foreground: #111111;
   --sidebar-primary: #111111;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F5F5F5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
   --sidebar-accent-foreground: #111111;
-  --sidebar-border: #E5E5E5;
+  --sidebar-border: #e5e5e5;
   --sidebar-ring: #111111;
 }
 
 .dark {
   --background: #111111;
-  --foreground: #FFFFFF;
+  --foreground: #ffffff;
   --card: #292929;
-  --card-foreground: #FFFFFF;
+  --card-foreground: #ffffff;
   --popover: #292929;
-  --popover-foreground: #FFFFFF;
-  --primary: #FFFFFF;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
   --primary-foreground: #111111;
-  --secondary: #FA5400;
-  --secondary-foreground: #FFFFFF;
+  --secondary: #fa5400;
+  --secondary-foreground: #ffffff;
   --muted: #292929;
-  --muted-foreground: #CACACB;
-  --accent: #FA5400;
-  --accent-foreground: #FFFFFF;
-  --destructive: #D43F21;
+  --muted-foreground: #cacacb;
+  --accent: #fa5400;
+  --accent-foreground: #ffffff;
+  --destructive: #d43f21;
   --border: #292929;
   --input: #292929;
-  --ring: #FFFFFF;
+  --ring: #ffffff;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: #111111;
-  --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #FFFFFF;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
   --sidebar-primary-foreground: #111111;
   --sidebar-accent: #292929;
-  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #292929;
-  --sidebar-ring: #FFFFFF;
+  --sidebar-ring: #ffffff;
 }
 
 @layer base {
@@ -126,7 +126,12 @@
     @apply bg-background text-foreground;
     font-family: var(--font-body);
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 700;
     text-transform: uppercase;

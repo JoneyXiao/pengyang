@@ -12,7 +12,7 @@ But you have to configure a couple things first. 🤓
 
 * Have a remote server ready and available.
 * Configure the DNS records of your domain to point to the IP of the server you just created.
-* Configure a wildcard subdomain for your domain, so that you can have multiple subdomains for different services, e.g. `*.fastapi-project.example.com`. This will be useful for accessing different components, like `dashboard.fastapi-project.example.com`, `api.fastapi-project.example.com`, `traefik.fastapi-project.example.com`, `adminer.fastapi-project.example.com`, etc. And also for `staging`, like `dashboard.staging.fastapi-project.example.com`, `adminer.staging.fastapi-project.example.com`, etc.
+* Configure a wildcard subdomain for your domain, so that you can have multiple subdomains for different services, e.g. `*.fastapi-project.example.com`. This will be useful for accessing different components, like `api.fastapi-project.example.com`, `traefik.fastapi-project.example.com`, `adminer.fastapi-project.example.com`, etc. And also for `staging`, like `staging.fastapi-project.example.com`, `api.staging.fastapi-project.example.com`, `adminer.staging.fastapi-project.example.com`, etc.
 * Install and configure [Docker](https://docs.docker.com/engine/install/) on the remote server (Docker Engine, not Docker Desktop).
 
 ## Public Traefik
@@ -170,7 +170,7 @@ export FIRST_SUPERUSER_PASSWORD="changethis"
 Set the `BACKEND_CORS_ORIGINS` to include your domain:
 
 ```bash
-export BACKEND_CORS_ORIGINS="https://dashboard.${DOMAIN?Variable not set},https://api.${DOMAIN?Variable not set}"
+export BACKEND_CORS_ORIGINS="https://${DOMAIN?Variable not set}"
 ```
 
 You can set several other environment variables:
@@ -188,6 +188,27 @@ You can set several other environment variables:
 * `POSTGRES_USER`: The Postgres user, you can leave the default.
 * `POSTGRES_DB`: The database name to use for this application. You can leave the default of `app`.
 * `SENTRY_DSN`: The DSN for Sentry, if you are using it.
+
+### Football School Feature: Additional Configuration
+
+The football school feature adds photo uploads and a public-facing website. Additional configuration for production:
+
+**Uploads volume**: Photo uploads are stored in a persistent Docker volume `app-uploads`, mounted at `/app/backend/uploads` in the backend container. This volume persists across container restarts and redeployments.
+
+**Single-domain routing**: The frontend serves everything from `${DOMAIN}`:
+
+* **Public site** at `https://${DOMAIN}/` — landing page, team intro, roster, match schedule
+* **Admin dashboard** at `https://${DOMAIN}/dashboard` — match management, content editing
+
+Traefik routes `${DOMAIN}` to the frontend container; `api.${DOMAIN}` to the backend.
+
+**CORS origins**: `BACKEND_CORS_ORIGINS` must include the root domain:
+
+```bash
+export BACKEND_CORS_ORIGINS="https://${DOMAIN}"
+```
+
+**DNS**: Ensure `${DOMAIN}` and `api.${DOMAIN}` point to your server.
 
 ## GitHub Actions Environment Variables
 
@@ -325,7 +346,9 @@ Traefik UI: `https://traefik.fastapi-project.example.com`
 
 ### Production
 
-Frontend: `https://dashboard.fastapi-project.example.com`
+Public site: `https://fastapi-project.example.com`
+
+Admin dashboard: `https://fastapi-project.example.com/dashboard`
 
 Backend API docs: `https://api.fastapi-project.example.com/docs`
 
@@ -335,7 +358,9 @@ Adminer: `https://adminer.fastapi-project.example.com`
 
 ### Staging
 
-Frontend: `https://dashboard.staging.fastapi-project.example.com`
+Public site: `https://staging.fastapi-project.example.com`
+
+Admin dashboard: `https://staging.fastapi-project.example.com/dashboard`
 
 Backend API docs: `https://api.staging.fastapi-project.example.com/docs`
 

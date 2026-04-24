@@ -3,7 +3,87 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { ItemsReadItemsData, ItemsReadItemsResponse, ItemsCreateItemData, ItemsCreateItemResponse, ItemsReadItemData, ItemsReadItemResponse, ItemsUpdateItemData, ItemsUpdateItemResponse, ItemsDeleteItemData, ItemsDeleteItemResponse, LoginLoginAccessTokenData, LoginLoginAccessTokenResponse, LoginTestTokenResponse, LoginRecoverPasswordData, LoginRecoverPasswordResponse, LoginResetPasswordData, LoginResetPasswordResponse, LoginRecoverPasswordHtmlContentData, LoginRecoverPasswordHtmlContentResponse, PrivateCreateUserData, PrivateCreateUserResponse, UsersReadUsersData, UsersReadUsersResponse, UsersCreateUserData, UsersCreateUserResponse, UsersReadUserMeResponse, UsersDeleteUserMeResponse, UsersUpdateUserMeData, UsersUpdateUserMeResponse, UsersUpdatePasswordMeData, UsersUpdatePasswordMeResponse, UsersRegisterUserData, UsersRegisterUserResponse, UsersReadUserByIdData, UsersReadUserByIdResponse, UsersUpdateUserData, UsersUpdateUserResponse, UsersDeleteUserData, UsersDeleteUserResponse, UtilsTestEmailData, UtilsTestEmailResponse, UtilsHealthCheckResponse } from './types.gen';
+import type { CoachesListCoachesResponse, CoachesCreateCoachData, CoachesCreateCoachResponse, CoachesUpdateCoachData, CoachesUpdateCoachResponse, CoachesDeleteCoachData, CoachesDeleteCoachResponse, ItemsReadItemsData, ItemsReadItemsResponse, ItemsCreateItemData, ItemsCreateItemResponse, ItemsReadItemData, ItemsReadItemResponse, ItemsUpdateItemData, ItemsUpdateItemResponse, ItemsDeleteItemData, ItemsDeleteItemResponse, LoginLoginAccessTokenData, LoginLoginAccessTokenResponse, LoginTestTokenResponse, LoginRecoverPasswordData, LoginRecoverPasswordResponse, LoginResetPasswordData, LoginResetPasswordResponse, LoginRecoverPasswordHtmlContentData, LoginRecoverPasswordHtmlContentResponse, MatchesCreateMatchData, MatchesCreateMatchResponse, MatchesListMatchesData, MatchesListMatchesResponse, MatchesUpdateMatchData, MatchesUpdateMatchResponse, MatchesDeleteMatchData, MatchesDeleteMatchResponse, MatchMediaUploadMatchPhotoData, MatchMediaUploadMatchPhotoResponse, MatchMediaAddMatchVideoLinkData, MatchMediaAddMatchVideoLinkResponse, MatchMediaDeleteMatchMediaData, MatchMediaDeleteMatchMediaResponse, MatchUpdatesCreateMatchUpdateData, MatchUpdatesCreateMatchUpdateResponse, MatchUpdatesDeleteMatchUpdateData, MatchUpdatesDeleteMatchUpdateResponse, PlayersListPlayersResponse, PlayersCreatePlayerData, PlayersCreatePlayerResponse, PlayersUpdatePlayerData, PlayersUpdatePlayerResponse, PlayersDeletePlayerData, PlayersDeletePlayerResponse, PrivateCreateUserData, PrivateCreateUserResponse, PublicGetLandingPageResponse, PublicGetTeamContentResponse, PublicGetCoachesResponse, PublicGetPlayersResponse, PublicGetMatchesData, PublicGetMatchesResponse, PublicGetMatchDetailData, PublicGetMatchDetailResponse, PublicGetMatchUpdatesData, PublicGetMatchUpdatesResponse, TeamContentGetTeamContentResponse, TeamContentUpdateTeamContentData, TeamContentUpdateTeamContentResponse, UsersReadUsersData, UsersReadUsersResponse, UsersCreateUserData, UsersCreateUserResponse, UsersReadUserMeResponse, UsersDeleteUserMeResponse, UsersUpdateUserMeData, UsersUpdateUserMeResponse, UsersUpdatePasswordMeData, UsersUpdatePasswordMeResponse, UsersRegisterUserData, UsersRegisterUserResponse, UsersReadUserByIdData, UsersReadUserByIdResponse, UsersUpdateUserData, UsersUpdateUserResponse, UsersDeleteUserData, UsersDeleteUserResponse, UtilsTestEmailData, UtilsTestEmailResponse, UtilsHealthCheckResponse } from './types.gen';
+
+export class CoachesService {
+    /**
+     * List Coaches
+     * List all coaches (admin).
+     * @returns CoachesPublic Successful Response
+     * @throws ApiError
+     */
+    public static listCoaches(): CancelablePromise<CoachesListCoachesResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/coaches/'
+        });
+    }
+    
+    /**
+     * Create Coach
+     * Create a coach.
+     * @param data The data for the request.
+     * @param data.formData
+     * @returns CoachPublic Successful Response
+     * @throws ApiError
+     */
+    public static createCoach(data: CoachesCreateCoachData): CancelablePromise<CoachesCreateCoachResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/coaches/',
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Update Coach
+     * Update a coach.
+     * @param data The data for the request.
+     * @param data.coachId
+     * @param data.formData
+     * @returns CoachPublic Successful Response
+     * @throws ApiError
+     */
+    public static updateCoach(data: CoachesUpdateCoachData): CancelablePromise<CoachesUpdateCoachResponse> {
+        return __request(OpenAPI, {
+            method: 'PATCH',
+            url: '/api/v1/coaches/{coach_id}',
+            path: {
+                coach_id: data.coachId
+            },
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Coach
+     * Delete a coach.
+     * @param data The data for the request.
+     * @param data.coachId
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteCoach(data: CoachesDeleteCoachData): CancelablePromise<CoachesDeleteCoachResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/coaches/{coach_id}',
+            path: {
+                coach_id: data.coachId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
 
 export class ItemsService {
     /**
@@ -213,6 +293,300 @@ export class LoginService {
     }
 }
 
+export class MatchesService {
+    /**
+     * Create Match
+     * Create a match.
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns MatchPublic Successful Response
+     * @throws ApiError
+     */
+    public static createMatch(data: MatchesCreateMatchData): CancelablePromise<MatchesCreateMatchResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/matches/',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * List Matches
+     * List matches (admin).
+     * @param data The data for the request.
+     * @param data.status
+     * @param data.skip
+     * @param data.limit
+     * @returns MatchesPublic Successful Response
+     * @throws ApiError
+     */
+    public static listMatches(data: MatchesListMatchesData = {}): CancelablePromise<MatchesListMatchesResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/matches/',
+            query: {
+                status: data.status,
+                skip: data.skip,
+                limit: data.limit
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Update Match
+     * Update a match (including status change).
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.requestBody
+     * @returns MatchPublic Successful Response
+     * @throws ApiError
+     */
+    public static updateMatch(data: MatchesUpdateMatchData): CancelablePromise<MatchesUpdateMatchResponse> {
+        return __request(OpenAPI, {
+            method: 'PATCH',
+            url: '/api/v1/matches/{match_id}',
+            path: {
+                match_id: data.matchId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Match
+     * Delete a match.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteMatch(data: MatchesDeleteMatchData): CancelablePromise<MatchesDeleteMatchResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/matches/{match_id}',
+            path: {
+                match_id: data.matchId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
+
+export class MatchMediaService {
+    /**
+     * Upload Match Photo
+     * Upload a photo to a match.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.formData
+     * @returns MatchMediaPublic Successful Response
+     * @throws ApiError
+     */
+    public static uploadMatchPhoto(data: MatchMediaUploadMatchPhotoData): CancelablePromise<MatchMediaUploadMatchPhotoResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/matches/{match_id}/media/photos',
+            path: {
+                match_id: data.matchId
+            },
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Add Match Video Link
+     * Add an external video link to a match.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.requestBody
+     * @returns MatchMediaPublic Successful Response
+     * @throws ApiError
+     */
+    public static addMatchVideoLink(data: MatchMediaAddMatchVideoLinkData): CancelablePromise<MatchMediaAddMatchVideoLinkResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/matches/{match_id}/media/videos',
+            path: {
+                match_id: data.matchId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Match Media
+     * Delete a match media item.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.mediaId
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteMatchMedia(data: MatchMediaDeleteMatchMediaData): CancelablePromise<MatchMediaDeleteMatchMediaResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/matches/{match_id}/media/{media_id}',
+            path: {
+                match_id: data.matchId,
+                media_id: data.mediaId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
+
+export class MatchUpdatesService {
+    /**
+     * Create Match Update
+     * Post a real-time update to a match.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.requestBody
+     * @returns MatchUpdatePublic Successful Response
+     * @throws ApiError
+     */
+    public static createMatchUpdate(data: MatchUpdatesCreateMatchUpdateData): CancelablePromise<MatchUpdatesCreateMatchUpdateResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/matches/{match_id}/updates',
+            path: {
+                match_id: data.matchId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Match Update
+     * Delete a match update.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.updateId
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deleteMatchUpdate(data: MatchUpdatesDeleteMatchUpdateData): CancelablePromise<MatchUpdatesDeleteMatchUpdateResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/matches/{match_id}/updates/{update_id}',
+            path: {
+                match_id: data.matchId,
+                update_id: data.updateId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
+
+export class PlayersService {
+    /**
+     * List Players
+     * List all players (admin, full data).
+     * @returns PlayersAdminPublic Successful Response
+     * @throws ApiError
+     */
+    public static listPlayers(): CancelablePromise<PlayersListPlayersResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/players/'
+        });
+    }
+    
+    /**
+     * Create Player
+     * Create a player.
+     * @param data The data for the request.
+     * @param data.formData
+     * @returns PlayerAdmin Successful Response
+     * @throws ApiError
+     */
+    public static createPlayer(data: PlayersCreatePlayerData): CancelablePromise<PlayersCreatePlayerResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/v1/players/',
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Update Player
+     * Update a player.
+     * @param data The data for the request.
+     * @param data.playerId
+     * @param data.formData
+     * @returns PlayerAdmin Successful Response
+     * @throws ApiError
+     */
+    public static updatePlayer(data: PlayersUpdatePlayerData): CancelablePromise<PlayersUpdatePlayerResponse> {
+        return __request(OpenAPI, {
+            method: 'PATCH',
+            url: '/api/v1/players/{player_id}',
+            path: {
+                player_id: data.playerId
+            },
+            formData: data.formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete Player
+     * Delete a player.
+     * @param data The data for the request.
+     * @param data.playerId
+     * @returns Message Successful Response
+     * @throws ApiError
+     */
+    public static deletePlayer(data: PlayersDeletePlayerData): CancelablePromise<PlayersDeletePlayerResponse> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/api/v1/players/{player_id}',
+            path: {
+                player_id: data.playerId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
+
 export class PrivateService {
     /**
      * Create User
@@ -226,6 +600,166 @@ export class PrivateService {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/v1/private/users/',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
+
+export class PublicService {
+    /**
+     * Get Landing Page
+     * Landing page aggregate data.
+     * @returns LandingPageData Successful Response
+     * @throws ApiError
+     */
+    public static getLandingPage(): CancelablePromise<PublicGetLandingPageResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/landing'
+        });
+    }
+    
+    /**
+     * Get Team Content
+     * Team introduction page content.
+     * @returns TeamContentPublic Successful Response
+     * @throws ApiError
+     */
+    public static getTeamContent(): CancelablePromise<PublicGetTeamContentResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/team-content'
+        });
+    }
+    
+    /**
+     * Get Coaches
+     * List all coaches (public).
+     * @returns CoachesPublic Successful Response
+     * @throws ApiError
+     */
+    public static getCoaches(): CancelablePromise<PublicGetCoachesResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/coaches'
+        });
+    }
+    
+    /**
+     * Get Players
+     * List all players (public, consent-filtered).
+     * @returns PlayersPublic Successful Response
+     * @throws ApiError
+     */
+    public static getPlayers(): CancelablePromise<PublicGetPlayersResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/players'
+        });
+    }
+    
+    /**
+     * Get Matches
+     * List all matches (public).
+     * @param data The data for the request.
+     * @param data.status
+     * @param data.skip
+     * @param data.limit
+     * @returns MatchesPublic Successful Response
+     * @throws ApiError
+     */
+    public static getMatches(data: PublicGetMatchesData = {}): CancelablePromise<PublicGetMatchesResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/matches',
+            query: {
+                status: data.status,
+                skip: data.skip,
+                limit: data.limit
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Get Match Detail
+     * Match detail with updates and media.
+     * @param data The data for the request.
+     * @param data.matchId
+     * @returns MatchDetailPublic Successful Response
+     * @throws ApiError
+     */
+    public static getMatchDetail(data: PublicGetMatchDetailData): CancelablePromise<PublicGetMatchDetailResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/matches/{match_id}',
+            path: {
+                match_id: data.matchId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
+     * Get Match Updates
+     * Match updates (used for polling).
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.after
+     * @returns MatchUpdatesPublic Successful Response
+     * @throws ApiError
+     */
+    public static getMatchUpdates(data: PublicGetMatchUpdatesData): CancelablePromise<PublicGetMatchUpdatesResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/public/matches/{match_id}/updates',
+            path: {
+                match_id: data.matchId
+            },
+            query: {
+                after: data.after
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+}
+
+export class TeamContentService {
+    /**
+     * Get Team Content
+     * Get current team content (admin).
+     * @returns TeamContentPublic Successful Response
+     * @throws ApiError
+     */
+    public static getTeamContent(): CancelablePromise<TeamContentGetTeamContentResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/team-content/'
+        });
+    }
+    
+    /**
+     * Update Team Content
+     * Update team introduction content. HTML is sanitized server-side.
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns TeamContentPublic Successful Response
+     * @throws ApiError
+     */
+    public static updateTeamContent(data: TeamContentUpdateTeamContentData): CancelablePromise<TeamContentUpdateTeamContentResponse> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/api/v1/team-content/',
             body: data.requestBody,
             mediaType: 'application/json',
             errors: {
