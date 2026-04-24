@@ -65,7 +65,7 @@ function RosterPage() {
 
       {/* Coaching Staff */}
       <section className="mb-16">
-          <h2
+        <h2
           className="mb-8 border-b-4 border-[#111111] pb-2 font-display text-lg tracking-wide md:text-xl"
           style={{ fontWeight: 900 }}
         >

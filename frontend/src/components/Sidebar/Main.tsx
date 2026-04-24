@@ -1,5 +1,4 @@
 import { Link as RouterLink, useRouterState } from "@tanstack/react-router"
-import type { LucideIcon } from "lucide-react"
 
 import {
   SidebarGroup,
@@ -9,12 +8,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import type { NavItem } from "@/config/nav"
 
-export type Item = {
-  icon: LucideIcon
-  title: string
-  path: string
-}
+export type Item = NavItem
 
 interface MainProps {
   items: Item[]

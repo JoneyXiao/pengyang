@@ -216,11 +216,7 @@ function LandingPage() {
   )
 }
 
-function HighlightsBento({
-  matches,
-}: {
-  matches: MatchPublic[]
-}) {
+function HighlightsBento({ matches }: { matches: MatchPublic[] }) {
   const m0 = matches[0]
   const m1 = matches[1]
   const m2 = matches[2]

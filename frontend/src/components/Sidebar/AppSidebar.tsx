@@ -1,12 +1,4 @@
-import {
-  Briefcase,
-  ExternalLink,
-  Home,
-  Shield,
-  Swords,
-  Trophy,
-  Users,
-} from "lucide-react"
+import { Briefcase, ExternalLink, Trophy } from "lucide-react"
 
 import { SidebarAppearance } from "@/components/Common/Appearance"
 import { Logo } from "@/components/Common/Logo"
@@ -16,21 +8,12 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar"
+import { adminNavItems } from "@/config/nav"
 import useAuth from "@/hooks/useAuth"
 import { type Item, Main } from "./Main"
 import { User } from "./User"
 
-const baseItems: Item[] = [
-  { icon: Home, title: "仪表盘", path: "/dashboard" },
-  { icon: Briefcase, title: "项目", path: "/items" },
-]
-
-const footballItems: Item[] = [
-  { icon: Shield, title: "球队介绍", path: "/team-content" },
-  { icon: Users, title: "教练管理", path: "/coaches" },
-  { icon: Users, title: "球员管理", path: "/players" },
-  { icon: Swords, title: "比赛管理", path: "/match-management" },
-]
+const baseItems: Item[] = [{ icon: Briefcase, title: "项目", path: "/items" }]
 
 export function AppSidebar() {
   const { user: currentUser } = useAuth()
@@ -38,7 +21,7 @@ export function AppSidebar() {
   const items = currentUser?.is_superuser
     ? [
         ...baseItems,
-        ...footballItems,
+        ...adminNavItems,
         { icon: Trophy, title: "管理员", path: "/admin" },
       ]
     : baseItems
