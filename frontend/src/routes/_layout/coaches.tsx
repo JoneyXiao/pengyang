@@ -75,7 +75,6 @@ function CoachesManagement() {
             setShowForm(true)
             setEditingId(null)
           }}
-          className="bg-[#111111] text-white hover:bg-[#292929]"
         >
           添加教练
         </Button>
@@ -84,7 +83,7 @@ function CoachesManagement() {
       {showForm && (
         <form
           onSubmit={handleSubmit}
-          className="mb-8 rounded-lg border border-[#E5E5E5] p-6"
+          className="mb-8 rounded-lg border border-border bg-card p-6"
         >
           <h2 className="mb-4 text-lg font-semibold">
             {editingId ? "编辑教练" : "添加教练"}
@@ -98,7 +97,7 @@ function CoachesManagement() {
                 id="name"
                 name="name"
                 required
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -109,7 +108,7 @@ function CoachesManagement() {
                 id="role"
                 name="role"
                 required
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div className="md:col-span-2">
@@ -123,7 +122,7 @@ function CoachesManagement() {
                 id="biography"
                 name="biography"
                 rows={3}
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -138,7 +137,7 @@ function CoachesManagement() {
                 name="sort_order"
                 type="number"
                 defaultValue={0}
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -155,12 +154,7 @@ function CoachesManagement() {
             </div>
           </div>
           <div className="mt-4 flex gap-2">
-            <Button
-              type="submit"
-              className="bg-[#111111] text-white hover:bg-[#292929]"
-            >
-              保存
-            </Button>
+            <Button type="submit">保存</Button>
             <Button
               type="button"
               variant="outline"
@@ -186,7 +180,7 @@ function CoachesManagement() {
           {data.data.map((coach) => (
             <div
               key={coach.id}
-              className="flex items-center justify-between rounded-lg border border-[#E5E5E5] p-4"
+              className="flex items-center justify-between rounded-lg border border-border bg-card p-4"
             >
               <div className="flex items-center gap-4">
                 {coach.photo_url ? (
@@ -197,7 +191,7 @@ function CoachesManagement() {
                     className="h-12 w-12 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F5F5] text-[#707072] font-bold">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground font-bold">
                     {coach.name.charAt(0)}
                   </div>
                 )}

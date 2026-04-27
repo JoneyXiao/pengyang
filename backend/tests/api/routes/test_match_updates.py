@@ -3,7 +3,9 @@ from fastapi.testclient import TestClient
 from app.core.config import settings
 
 
-def _create_match(client: TestClient, headers: dict[str, str]) -> str:
+def _create_match(
+    client: TestClient, headers: dict[str, str], *, is_public: bool = True
+) -> str:
     r = client.post(
         f"{settings.API_V1_STR}/matches/",
         headers=headers,
@@ -11,6 +13,7 @@ def _create_match(client: TestClient, headers: dict[str, str]) -> str:
             "match_date": "2025-03-15T14:00:00",
             "home_team": "鹏飏足球",
             "away_team": "对手队",
+            "is_public": is_public,
         },
     )
     assert r.status_code == 201
@@ -63,6 +66,36 @@ def test_public_match_updates(
     data = r.json()
     assert "data" in data
     assert len(data["data"]) >= 1
+
+
+def test_public_match_updates_return_404_for_private_match(
+    client: TestClient, superuser_token_headers: dict[str, str]
+) -> None:
+    match_id = _create_match(client, superuser_token_headers, is_public=False)
+    client.post(
+        f"{settings.API_V1_STR}/matches/{match_id}/updates",
+        headers=superuser_token_headers,
+        json={"content": "隐藏动态"},
+    )
+    r = client.get(f"{settings.API_V1_STR}/public/matches/{match_id}/updates")
+    assert r.status_code == 404
+
+
+def test_admin_match_updates_include_private_match_updates(
+    client: TestClient, superuser_token_headers: dict[str, str]
+) -> None:
+    match_id = _create_match(client, superuser_token_headers, is_public=False)
+    client.post(
+        f"{settings.API_V1_STR}/matches/{match_id}/updates",
+        headers=superuser_token_headers,
+        json={"content": "后台可见动态"},
+    )
+    r = client.get(
+        f"{settings.API_V1_STR}/matches/{match_id}/updates",
+        headers=superuser_token_headers,
+    )
+    assert r.status_code == 200
+    assert len(r.json()["data"]) >= 1
 
 
 def test_create_update_unauthenticated(

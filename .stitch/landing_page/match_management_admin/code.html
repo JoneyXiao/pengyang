@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - Match Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Jost:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "disabled-text": "#8D8D8F",
+                    "primary-hover": "#292929",
+                    "neutral-text": "#707072",
+                    "on-background": "#1c1b1b",
+                    "surface-tint": "#5f5e5e",
+                    "border": "#E5E5E5",
+                    "secondary": "#aa3700",
+                    "error": "#D43F21",
+                    "surface-container": "#f1edec",
+                    "on-tertiary-container": "#868381",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#313030",
+                    "on-tertiary-fixed": "#1d1b1a",
+                    "surface": "#F5F5F5",
+                    "on-surface-variant": "#444748",
+                    "surface-container-high": "#ebe7e6",
+                    "inverse-on-surface": "#f4f0ef",
+                    "on-primary-container": "#858383",
+                    "disabled-bg": "#CACACB",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#000000",
+                    "surface-container-low": "#f7f3f2",
+                    "warning": "#FFC107",
+                    "on-secondary-fixed-variant": "#822800",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#380c00",
+                    "on-primary-fixed": "#1c1b1b",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "surface-dim": "#ddd9d8",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2e1",
+                    "outline-variant": "#c4c7c7",
+                    "inverse-primary": "#c8c6c5",
+                    "primary-fixed": "#e5e2e1",
+                    "secondary-fixed-dim": "#ffb59c",
+                    "primary-container": "#1c1b1b",
+                    "on-secondary": "#ffffff",
+                    "primary": "#000000",
+                    "tertiary-fixed": "#e6e1df",
+                    "on-primary-fixed-variant": "#474646",
+                    "secondary-fixed": "#ffdbcf",
+                    "tertiary-container": "#1d1b1a",
+                    "background": "#FFFFFF",
+                    "surface-bright": "#fdf8f8",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1c1b1b",
+                    "secondary-container": "#ff5706",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "outline": "#747878",
+                    "on-secondary-container": "#511500",
+                    "success": "#128A09"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "lg": "24px",
+                    "margin-max": "120px",
+                    "md": "16px",
+                    "section": "48px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "hero": "96px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Jost"],
+                    "headline-sm": ["Jost"],
+                    "nav-link": ["Inter"],
+                    "product-title": ["Jost"],
+                    "display-hero": ["Jost"],
+                    "label-caps": ["Inter"],
+                    "body-secondary": ["Inter"],
+                    "body-main": ["Inter"],
+                    "headline-lg": ["Jost"]
+            },
+            "fontSize": {
+                    "headline-md": ["36px", {"lineHeight": "1.1", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "nav-link": ["16px", {"lineHeight": "1.5", "fontWeight": "500"}],
+                    "product-title": ["16px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-hero": ["120px", {"lineHeight": "0.95", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "fontWeight": "600"}],
+                    "body-secondary": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-main": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "0.95", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom utilities mapped from style guidance */
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .form-input {
+            background-color: var(--tw-colors-surface);
+            border: 2px solid transparent;
+            transition: border-color 0.15s ease-in-out;
+        }
+        .form-input:focus {
+            border-color: var(--tw-colors-primary);
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-main flex min-h-screen">
+<!-- SideNavBar (from JSON Anchor) -->
+<nav class="fixed left-0 top-0 h-screen w-64 flex flex-col py-8 bg-surface border-r-2 border-primary z-50">
+<!-- Header -->
+<div class="px-6 mb-section">
+<div class="flex items-center space-x-sm mb-lg">
+<img alt="Coach Avatar" class="w-12 h-12 rounded-full object-cover border-2 border-primary" data-alt="Close-up portrait of a focused athletic coach wearing a black cap and whistle in natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMuDBfh1a8Xk6X4-d6bxrcpCGpZF1FQCInOapRjbwy50QyU_yk167QkPon4rJUfgjPtwuJtm8bo5nu_VxiKE8WunRWAsxtIXM0SZFcckySelHy1JQbV-FPZhB1A9otT9tuIdQW6gmwENbs2pbFwLjzP2X5SwM4HJ0Sruqa4nzxJQIqo7GiwGl5N2pAdSg_4MbiGR7kh7qD6Y7IN_oWWldyIvpv8SFGq_1FnaPjhQv9RcGXtwoIRjLXEDnvy_4XIqMnUhAXkfmtW4DF"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">管理后台</h2>
+<p class="font-label-caps text-label-caps text-neutral-text uppercase mt-1">观湖实验管理系统</p>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col flex-1 space-y-base">
+<!-- Active Tab -->
+<li class="pr-4">
+<a class="flex items-center px-6 py-sm bg-primary text-on-primary rounded-r-full font-nav-link text-nav-link transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-sm" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    仪表盘
+                </a>
+</li>
+<!-- Inactive Tabs -->
+<li class="pr-4">
+<a class="flex items-center px-6 py-sm text-neutral-text hover:text-primary hover:bg-surface-container-highest hover:pl-8 rounded-r-full font-nav-link text-nav-link transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-sm">event_note</span>
+                    赛事发布
+                </a>
+</li>
+<li class="pr-4">
+<a class="flex items-center px-6 py-sm text-neutral-text hover:text-primary hover:bg-surface-container-highest hover:pl-8 rounded-r-full font-nav-link text-nav-link transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-sm">sports_score</span>
+                    比分更新
+                </a>
+</li>
+<li class="pr-4">
+<a class="flex items-center px-6 py-sm text-neutral-text hover:text-primary hover:bg-surface-container-highest hover:pl-8 rounded-r-full font-nav-link text-nav-link transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-sm">cloud_upload</span>
+                    媒体库
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 p-lg md:p-section w-full max-w-[1440px] mx-auto">
+<header class="mb-section flex justify-between items-end border-b-4 border-primary pb-sm">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-2 block">Match Management</span>
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase">Dashboard</h1>
+</div>
+<button class="h-[48px] bg-primary text-on-primary font-label-caps text-label-caps uppercase rounded-[30px] px-lg hover:bg-primary-hover transition-colors flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">add</span>
+                Quick Action
+            </button>
+</header>
+<!-- Fixed Grid Layout (4px density between tight elements, larger gaps for sections) -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-md">
+<!-- Add New Match Form (Bento Large Cell) -->
+<section class="xl:col-span-2 bg-background border-2 border-primary p-lg hover-lift">
+<div class="flex items-center mb-lg pb-sm border-b-2 border-surface">
+<span class="material-symbols-outlined text-headline-sm mr-xs">event_note</span>
+<h2 class="font-headline-sm text-headline-sm uppercase text-primary">Add New Match</h2>
+</div>
+<form class="space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps uppercase text-neutral-text mb-base">Match Time</label>
+<input class="form-input w-full p-sm font-body-main text-body-main text-primary" type="datetime-local"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps uppercase text-neutral-text mb-base">Opponent Team</label>
+<input class="form-input w-full p-sm font-body-main text-body-main text-primary" placeholder="Enter opponent name..." type="text"/>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps uppercase text-neutral-text mb-base">Match Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-neutral-text">location_on</span>
+<input class="form-input w-full p-sm pl-[40px] font-body-main text-body-main text-primary" placeholder="Stadium or field address..." type="text"/>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps uppercase text-neutral-text mb-base">Tactical Precautions &amp; Notes</label>
+<textarea class="form-input w-full p-sm font-body-main text-body-main text-primary resize-none" placeholder="Enter key focus areas, player assignments, etc." rows="4"></textarea>
+</div>
+<div class="pt-sm">
+<button class="w-full h-[48px] bg-primary text-on-primary font-label-caps text-label-caps uppercase rounded-[30px] hover:bg-primary-hover transition-colors" type="button">
+                            Publish Match
+                        </button>
+</div>
+</form>
+</section>
+<!-- Real-time Score Updates (Bento Vertical Cell) -->
+<section class="xl:col-span-1 bg-surface border-2 border-primary p-lg flex flex-col hover-lift">
+<div class="flex items-center justify-between mb-lg pb-sm border-b-2 border-border">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-headline-sm mr-xs text-error">sensors</span>
+<h2 class="font-headline-sm text-headline-sm uppercase text-primary">Live Score</h2>
+</div>
+<span class="font-label-caps text-label-caps bg-error text-on-error px-2 py-1 rounded-sm uppercase animate-pulse">Live</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center py-section space-y-lg">
+<!-- Home Team -->
+<div class="w-full text-center">
+<span class="font-label-caps text-label-caps uppercase text-neutral-text block mb-base">观湖实验 (Home)</span>
+<div class="flex items-center justify-center space-x-md">
+<button class="w-[40px] h-[40px] border border-primary bg-background text-primary flex items-center justify-center hover:bg-surface-container-highest transition-colors rounded-sm">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-display-hero text-display-hero text-primary w-[80px]">2</span>
+<button class="w-[40px] h-[40px] border border-primary bg-primary text-on-primary flex items-center justify-center hover:bg-primary-hover transition-colors rounded-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="w-full h-[2px] bg-border relative">
+<span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface px-sm font-label-caps text-label-caps text-neutral-text uppercase">VS</span>
+</div>
+<!-- Away Team -->
+<div class="w-full text-center">
+<span class="font-label-caps text-label-caps uppercase text-neutral-text block mb-base">Opponent (Away)</span>
+<div class="flex items-center justify-center space-x-md">
+<button class="w-[40px] h-[40px] border border-primary bg-background text-primary flex items-center justify-center hover:bg-surface-container-highest transition-colors rounded-sm">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-display-hero text-display-hero text-neutral-text w-[80px]">0</span>
+<button class="w-[40px] h-[40px] border border-primary bg-background text-primary flex items-center justify-center hover:bg-surface-container-highest transition-colors rounded-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full h-[48px] border border-primary bg-background text-primary font-label-caps text-label-caps uppercase rounded-[30px] hover:bg-surface transition-colors mt-auto">
+                    Finalize Result
+                </button>
+</section>
+<!-- Media Upload Area (Full Width Bottom Cell) -->
+<section class="xl:col-span-3 bg-background border-2 border-primary p-lg hover-lift">
+<div class="flex items-center mb-lg pb-sm border-b-2 border-surface">
+<span class="material-symbols-outlined text-headline-sm mr-xs">perm_media</span>
+<h2 class="font-headline-sm text-headline-sm uppercase text-primary">Media Upload</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<!-- Dropzone -->
+<div class="md:col-span-1 border-2 border-dashed border-outline bg-surface flex flex-col items-center justify-center p-xl cursor-pointer hover:border-primary hover:bg-surface-container transition-colors min-h-[200px]">
+<span class="material-symbols-outlined text-[48px] text-neutral-text mb-sm">cloud_upload</span>
+<span class="font-product-title text-product-title text-primary uppercase text-center block">Drop Files Here</span>
+<span class="font-body-secondary text-body-secondary text-neutral-text text-center mt-base block">Photos &amp; Videos (Max 50MB)</span>
+</div>
+<!-- Previews (High contrast, square cropped) -->
+<div class="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-base bg-surface p-base border border-border">
+<!-- Preview Item -->
+<div class="relative group aspect-square bg-surface-container-highest overflow-hidden">
+<img alt="Match photo preview" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="Action shot of a soccer player kicking the ball aggressively with stadium lights in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4LaEbdteAxhQ9ZnXYsum5AaV74WFEDTQKEjgbg4li2NdLfsY3fit8sim7KnWSL41OhIg9Po6FZq7Cey4-fV9QRxsQS6BljcXw804PONVwjC26E6nHj8yGwDkQRB3jtuFo46d9AvSZOJKw0Vz31GezsTL93Sedr-kpUK6Kn8I9umzW3z5vZkvSNx09QrnvkkBQeRRjtKA6ZL3yFhusKhVOEJMZRPaW-WvwNVaGIBppF7tOxiZ0cfaazpLvka1rFhYx2GMnVR6441DC"/>
+<div class="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="w-[40px] h-[40px] bg-background text-error rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<span class="absolute top-2 left-2 bg-primary text-on-primary font-label-caps text-[10px] px-2 py-1 uppercase tracking-widest">Image</span>
+</div>
+<!-- Preview Item -->
+<div class="relative group aspect-square bg-surface-container-highest overflow-hidden">
+<img alt="Match video preview" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="Close up of a soccer ball on grass field with blurred players in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJt6Uj4E7YHtPBqEr7vwVxxBItPOph2FvBEj5msA1L7MiaC5euSDql9sHcNMbE9gAXCSSkID7pVZo7k7t4N2ZLnjrhLGulmQGfs37YXSPxgVDXGUS0lHJlzkkhtMyYsl7mS-LEDqC41GNaSLmZNSge7cMJ6BSnVtgIl9CuduEXVnBVU3LHpGqNn9UnU1JYHA7XATra4Avn8AeR3yH4NpTlljGnptbI5wGvpOz4bj1WXMhF3hqNdVzcvo5VOndCu4TyEpn47QM0EYKX"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined text-[48px] text-on-primary drop-shadow-md">play_circle</span>
+</div>
+<div class="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="w-[40px] h-[40px] bg-background text-error rounded-full flex items-center justify-center pointer-events-auto">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<span class="absolute top-2 left-2 bg-primary text-on-primary font-label-caps text-[10px] px-2 py-1 uppercase tracking-widest">Video</span>
+</div>
+<!-- Empty Slot Indicator to show grid structure -->
+<div class="aspect-square bg-background border border-border flex items-center justify-center">
+<span class="font-body-secondary text-body-secondary text-disabled-text">Empty Slot</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

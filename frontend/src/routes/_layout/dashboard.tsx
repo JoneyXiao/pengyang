@@ -25,7 +25,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { Checkbox } from "@/components/ui/checkbox"
 import useCustomToast from "@/hooks/useCustomToast"
+import { IoCalendarOutline } from "react-icons/io5"
 
 export const Route = createFileRoute("/_layout/dashboard")({
   component: MatchesManagement,
@@ -99,6 +101,7 @@ function MatchesManagement() {
       home_team: fd.get("home_team") as string,
       away_team: fd.get("away_team") as string,
       precautions: (fd.get("precautions") as string) || undefined,
+      is_public: fd.get("is_public") === "on",
     }
     createMutation.mutate(body)
   }
@@ -121,9 +124,6 @@ function MatchesManagement() {
     <div>
       {/* Dashboard header */}
       <div className="mb-8">
-        <p className="mb-1 font-body text-xs uppercase tracking-[0.15em] text-[#707072]">
-          比赛管理
-        </p>
         <div className="flex items-center justify-between">
           <h1
             className="font-display text-3xl tracking-tight md:text-4xl"
@@ -140,7 +140,7 @@ function MatchesManagement() {
               })
               addMatchFormRef.current?.querySelector("input")?.focus()
             }}
-            className="flex items-center gap-2 rounded-[30px] bg-[#111111] px-5 py-2.5 font-display text-sm text-white transition-colors hover:bg-[#292929] focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2 outline-none"
+            className="flex items-center gap-2 rounded-[30px] bg-primary px-5 py-2.5 font-display text-sm text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background outline-none"
             style={{ fontWeight: 700 }}
           >
             <Plus size={16} />
@@ -154,17 +154,10 @@ function MatchesManagement() {
         {/* ADD NEW MATCH card */}
         <div
           ref={addMatchFormRef}
-          className="rounded-lg border-2 border-[#111111] p-5 transition-shadow hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] md:p-6 xl:col-span-2"
+          className="rounded-lg border-1 border-border p-5 transition-shadow md:p-6 xl:col-span-2"
         >
           <div className="mb-5 flex items-center gap-2">
-            <svg
-              className="h-5 w-5 text-[#111111]"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z" />
-            </svg>
+            <IoCalendarOutline className="size-5 text-foreground" />
             <h2
               className="font-display text-lg tracking-wide"
               style={{ fontWeight: 900 }}
@@ -177,7 +170,7 @@ function MatchesManagement() {
               <div>
                 <label
                   htmlFor="match_date"
-                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
                 >
                   比赛时间
                 </label>
@@ -186,13 +179,13 @@ function MatchesManagement() {
                   name="match_date"
                   type="datetime-local"
                   required
-                  className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-4 py-2.5 text-sm transition-colors focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+                  className="w-full rounded-lg border-1 border-input bg-background px-4 py-2.5 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                 />
               </div>
               <div>
                 <label
                   htmlFor="away_team"
-                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
                 >
                   对手
                 </label>
@@ -201,13 +194,13 @@ function MatchesManagement() {
                   name="away_team"
                   required
                   placeholder="输入对手名称..."
-                  className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-4 py-2.5 text-sm transition-colors placeholder:text-[#B0B0B0] focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+                  className="w-full rounded-lg border-1 border-input bg-background px-4 py-2.5 text-sm transition-colors placeholder:text-muted-foreground focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                 />
               </div>
               <div>
                 <label
                   htmlFor="home_team"
-                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
                 >
                   主队
                 </label>
@@ -216,13 +209,13 @@ function MatchesManagement() {
                   name="home_team"
                   required
                   defaultValue="鹏飏"
-                  className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-4 py-2.5 text-sm transition-colors focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+                  className="w-full rounded-lg border-1 border-input bg-background px-4 py-2.5 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                 />
               </div>
               <div className="md:col-span-2">
                 <label
                   htmlFor="precautions"
-                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+                  className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
                 >
                   注意事项与备注
                 </label>
@@ -231,14 +224,33 @@ function MatchesManagement() {
                   name="precautions"
                   rows={3}
                   placeholder="输入关键注意事项、球员部署等..."
-                  className="w-full resize-none rounded-lg border-2 border-[#E5E5E5] bg-white px-4 py-2.5 text-sm transition-colors placeholder:text-[#B0B0B0] focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+                  className="w-full resize-none rounded-lg border-1 border-input bg-background px-4 py-2.5 text-sm transition-colors placeholder:text-muted-foreground focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                 />
+              </div>
+              <div className="md:col-span-2">
+                <label
+                  htmlFor="is_public"
+                  className="flex items-start gap-3 rounded-lg border-1 border-border bg-background p-4 transition-colors hover:border-ring"
+                >
+                  <Checkbox id="is_public" name="is_public" defaultChecked />
+                  <span className="flex flex-col gap-1">
+                    <span
+                      className="font-display text-sm tracking-wide text-foreground"
+                      style={{ fontWeight: 700 }}
+                    >
+                      公开展示比赛数据
+                    </span>
+                    <span className="font-body text-xs text-muted-foreground">
+                      关闭后，公众页面将隐藏该比赛的赛程、比分、动态和媒体。
+                    </span>
+                  </span>
+                </label>
               </div>
             </div>
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="mt-4 w-full rounded-[30px] bg-[#111111] py-3 font-display text-sm tracking-wide text-white transition-colors hover:bg-[#292929] disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2 outline-none"
+              className="mt-4 w-full rounded-[30px] bg-primary py-3 font-display text-sm tracking-wide text-primary-foreground transition-colors hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background outline-none"
               style={{ fontWeight: 700 }}
             >
               {createMutation.isPending ? "发布中..." : "发布比赛"}
@@ -288,10 +300,10 @@ function MatchesManagement() {
                 key={tab.value}
                 type="button"
                 onClick={() => setStatusFilter(tab.value as MatchStatus | "")}
-                className={`rounded-[30px] px-4 py-1.5 font-display text-xs tracking-wide transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2 ${
+                className={`rounded-[30px] px-4 py-1.5 font-display text-xs tracking-wide transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                   statusFilter === tab.value
-                    ? "bg-[#111111] text-white"
-                    : "bg-[#F5F5F5] text-[#707072] hover:bg-[#E5E5E5]"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                 }`}
                 style={{ fontWeight: 700 }}
               >
@@ -304,10 +316,7 @@ function MatchesManagement() {
         {isLoading ? (
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-20 animate-pulse rounded-lg bg-[#F5F5F5]"
-              />
+              <div key={i} className="h-20 animate-pulse rounded-lg bg-muted" />
             ))}
           </div>
         ) : data?.data && data.data.length > 0 ? (
@@ -315,7 +324,8 @@ function MatchesManagement() {
             {data.data.map((match) => (
               <div
                 key={match.id}
-                className="rounded-lg border-2 border-[#E5E5E5] p-4 transition-shadow hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] md:p-5"
+                data-testid="match-row"
+                className="rounded-lg border-muted-foreground bg-card p-4 md:p-5"
               >
                 <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                   <div className="flex items-center gap-4">
@@ -325,6 +335,9 @@ function MatchesManagement() {
                       {match.status === "live" && <PulsingDot />}
                       {STATUS_LABELS[match.status as MatchStatus] ??
                         match.status}
+                    </span>
+                    <span className="inline-flex rounded-full border border-border bg-muted px-3 py-1 text-[10px] font-semibold tracking-wide text-muted-foreground">
+                      {match.is_public === false ? "未公开" : "公开"}
                     </span>
                     <div>
                       <p
@@ -339,7 +352,7 @@ function MatchesManagement() {
                           </span>
                         )}
                       </p>
-                      <p className="text-xs text-[#707072]">
+                      <p className="text-xs text-muted-foreground">
                         {new Date(match.match_date).toLocaleString("zh-CN", {
                           timeZone: "Asia/Shanghai",
                         })}
@@ -354,10 +367,10 @@ function MatchesManagement() {
                           expandedId === match.id ? null : match.id,
                         )
                       }
-                      className={`rounded-[30px] border-2 px-4 py-1.5 font-display text-[10px] tracking-wide transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2 ${
+                      className={`rounded-[30px] border-1 px-4 py-1.5 font-display text-[10px] tracking-wide transition-colors outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                         expandedId === match.id
-                          ? "border-[#111111] bg-[#111111] text-white"
-                          : "border-[#E5E5E5] text-[#707072] hover:border-[#111111] hover:text-[#111111]"
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border text-muted-foreground hover:border-ring hover:text-foreground"
                       }`}
                       style={{ fontWeight: 700 }}
                     >
@@ -366,7 +379,7 @@ function MatchesManagement() {
                     <button
                       type="button"
                       onClick={() => toggleStatus(match.id, match.status)}
-                      className="rounded-[30px] border-2 border-[#E5E5E5] px-4 py-1.5 font-display text-[10px] tracking-wide text-[#707072] transition-colors hover:border-[#111111] hover:text-[#111111] outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+                      className="rounded-[30px] border-1 border-border px-4 py-1.5 font-display text-[10px] tracking-wide text-muted-foreground transition-colors hover:border-ring hover:text-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       style={{ fontWeight: 700 }}
                     >
                       {match.status === "upcoming"
@@ -378,7 +391,7 @@ function MatchesManagement() {
                     <button
                       type="button"
                       onClick={() => handleSetEditingId(match.id)}
-                      className="rounded-[30px] border-2 border-[#E5E5E5] px-4 py-1.5 font-display text-[10px] tracking-wide text-[#707072] transition-colors hover:border-[#111111] hover:text-[#111111] outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+                      className="rounded-[30px] border-1 border-border px-4 py-1.5 font-display text-[10px] tracking-wide text-muted-foreground transition-colors hover:border-ring hover:text-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                       style={{ fontWeight: 700 }}
                     >
                       编辑
@@ -387,7 +400,7 @@ function MatchesManagement() {
                       <AlertDialogTrigger asChild>
                         <button
                           type="button"
-                          className="rounded-[30px] border-2 border-red-200 px-4 py-1.5 font-display text-[10px] tracking-wide text-red-500 transition-colors hover:border-red-500 hover:bg-red-500 hover:text-white outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                          className="rounded-[30px] border-1 border-destructive/30 px-4 py-1.5 font-display text-[10px] tracking-wide text-destructive transition-colors hover:border-destructive hover:bg-destructive hover:text-white outline-none focus-visible:ring-1 focus-visible:ring-destructive focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                           style={{ fontWeight: 700 }}
                         >
                           删除
@@ -406,7 +419,7 @@ function MatchesManagement() {
                           <AlertDialogCancel>取消</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={() => deleteMutation.mutate(match.id)}
-                            className="bg-red-500 text-white hover:bg-red-600"
+                            className="bg-destructive text-white hover:bg-destructive/90"
                           >
                             删除
                           </AlertDialogAction>
@@ -418,7 +431,7 @@ function MatchesManagement() {
 
                 {/* Expanded panel: updates + media */}
                 {expandedId === match.id && (
-                  <div className="mt-4 space-y-6 border-t-2 border-[#E5E5E5] pt-4">
+                  <div className="mt-4 space-y-6 border-t-2 border-border pt-4">
                     <MatchUpdatesPanel matchId={match.id} />
                   </div>
                 )}
@@ -438,8 +451,10 @@ function MatchesManagement() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border-2 border-dashed border-[#E5E5E5] px-4 py-12 text-center">
-            <p className="text-sm text-[#707072]">暂无比赛，使用上方表单创建</p>
+          <div className="rounded-lg border-1 border-dashed border-border px-4 py-12 text-center">
+            <p className="text-sm text-muted-foreground">
+              暂无比赛，使用上方表单创建
+            </p>
           </div>
         )}
       </div>

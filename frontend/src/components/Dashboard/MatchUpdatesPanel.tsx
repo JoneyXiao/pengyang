@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
-import { MatchUpdatesService, PublicService } from "@/client"
+import { MatchUpdatesService } from "@/client"
 import useCustomToast from "@/hooks/useCustomToast"
 
 export function MatchUpdatesPanel({ matchId }: { matchId: string }) {
@@ -10,7 +10,7 @@ export function MatchUpdatesPanel({ matchId }: { matchId: string }) {
 
   const { data, isLoading } = useQuery({
     queryKey: ["match-updates", matchId],
-    queryFn: () => PublicService.getMatchUpdates({ matchId }),
+    queryFn: () => MatchUpdatesService.getMatchUpdates({ matchId }),
   })
 
   const createMutation = useMutation({
@@ -50,30 +50,30 @@ export function MatchUpdatesPanel({ matchId }: { matchId: string }) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="输入比赛动态..."
-          className="flex-1 rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm transition-colors focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+          className="flex-1 rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
         />
         <button
           type="button"
           disabled={!content.trim()}
           onClick={() => createMutation.mutate()}
-          className="shrink-0 rounded-[30px] bg-[#111111] px-4 py-2 font-display text-xs tracking-wide text-white transition-colors hover:bg-[#292929] disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+          className="shrink-0 rounded-[30px] bg-primary px-4 py-2 font-display text-xs tracking-wide text-primary-foreground transition-colors hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           style={{ fontWeight: 700 }}
         >
           发布
         </button>
       </div>
       {isLoading ? (
-        <div className="h-8 animate-pulse rounded bg-[#F5F5F5]" />
+        <div className="h-8 animate-pulse rounded bg-muted" />
       ) : data?.data && data.data.length > 0 ? (
         <div className="space-y-2">
           {data.data.map((update) => (
             <div
               key={update.id}
-              className="flex items-start justify-between rounded-lg bg-[#F5F5F5] px-3 py-2.5 text-sm"
+              className="flex items-start justify-between rounded-lg bg-muted px-3 py-2.5 text-sm"
             >
               <div>
-                <p className="text-[#111111]">{update.content}</p>
-                <time className="text-xs text-[#707072]">
+                <p className="text-foreground">{update.content}</p>
+                <time className="text-xs text-muted-foreground">
                   {new Date(update.created_at).toLocaleTimeString("zh-CN", {
                     timeZone: "Asia/Shanghai",
                     hour: "2-digit",
@@ -83,7 +83,7 @@ export function MatchUpdatesPanel({ matchId }: { matchId: string }) {
               </div>
               <button
                 type="button"
-                className="ml-2 text-xs text-red-500 hover:underline outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-1 rounded"
+                className="ml-2 rounded text-xs text-destructive hover:underline outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                 onClick={() => deleteMutation.mutate(update.id)}
               >
                 删除
@@ -92,7 +92,7 @@ export function MatchUpdatesPanel({ matchId }: { matchId: string }) {
           ))}
         </div>
       ) : (
-        <p className="text-xs text-[#B0B0B0]">暂无动态</p>
+        <p className="text-xs text-muted-foreground">暂无动态</p>
       )}
     </div>
   )

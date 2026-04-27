@@ -30,7 +30,7 @@ function TeamContentEditor() {
     editorProps: {
       attributes: {
         class:
-          "prose prose-lg max-w-none min-h-[300px] p-4 border border-[#E5E5E5] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#111111]",
+          "prose prose-lg max-w-none min-h-[300px] rounded-lg border border-border bg-card p-4 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1 focus:ring-offset-background",
       },
     },
   })
@@ -74,11 +74,7 @@ function TeamContentEditor() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">球队介绍编辑</h1>
-        <Button
-          onClick={handleSave}
-          disabled={mutation.isPending}
-          className="bg-[#111111] text-white hover:bg-[#292929]"
-        >
+        <Button onClick={handleSave} disabled={mutation.isPending}>
           {mutation.isPending ? "保存中..." : "保存"}
         </Button>
       </div>

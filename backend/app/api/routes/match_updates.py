@@ -1,15 +1,40 @@
 import uuid
+from datetime import datetime
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.api.deps import SessionDep, get_current_active_superuser
 from app import crud
-from app.models import MatchUpdateCreate, MatchUpdatePublic, Message, User
+from app.api.deps import SessionDep, get_current_active_superuser
+from app.models import (
+    MatchUpdateCreate,
+    MatchUpdatePublic,
+    MatchUpdatesPublic,
+    Message,
+    User,
+)
 
 router = APIRouter(prefix="/matches", tags=["match-updates"])
 
 SuperUser = Annotated[User, Depends(get_current_active_superuser)]
+
+
+@router.get("/{match_id}/updates", response_model=MatchUpdatesPublic)
+def get_match_updates(
+    session: SessionDep,
+    match_id: uuid.UUID,
+    _current_user: SuperUser,
+    after: datetime | None = None,
+) -> Any:
+    """List match updates (admin)."""
+    match = crud.get_match(session=session, match_id=match_id)
+    if not match:
+        raise HTTPException(status_code=404, detail="Match not found")
+    updates = crud.get_match_updates(session=session, match_id=match_id, after=after)
+    return MatchUpdatesPublic(
+        data=[MatchUpdatePublic.model_validate(u) for u in updates],
+        count=len(updates),
+    )
 
 
 @router.post(

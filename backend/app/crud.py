@@ -15,9 +15,9 @@ from app.models import (
     MatchCreate,
     MatchMedia,
     MatchMediaVideoCreate,
+    MatchPatch,
     MatchUpdate,
     MatchUpdateCreate,
-    MatchPatch,
     Player,
     PlayerCreate,
     PlayerUpdate,
@@ -222,12 +222,15 @@ def get_matches(
     *,
     session: Session,
     status: str | None = None,
+    public_only: bool = False,
     skip: int = 0,
     limit: int = 20,
 ) -> tuple[list[Match], int]:
     stmt = select(Match)
     if status:
         stmt = stmt.where(Match.status == status)
+    if public_only:
+        stmt = stmt.where(Match.is_public)
     count_stmt = stmt
     count = len(list(session.exec(count_stmt).all()))
     stmt = stmt.order_by(col(Match.match_date).desc()).offset(skip).limit(limit)
@@ -339,6 +342,18 @@ def get_match_medias(*, session: Session, match_id: uuid.UUID) -> list[MatchMedi
         select(MatchMedia)
         .where(MatchMedia.match_id == match_id)
         .order_by(MatchMedia.sort_order)
+    )
+    return list(session.exec(stmt).all())
+
+
+def get_match_photos(
+    *, session: Session, match_id: uuid.UUID, limit: int = 10
+) -> list[MatchMedia]:
+    stmt = (
+        select(MatchMedia)
+        .where(MatchMedia.match_id == match_id, MatchMedia.media_type == "photo")
+        .order_by(MatchMedia.sort_order)
+        .limit(limit)
     )
     return list(session.exec(stmt).all())
 

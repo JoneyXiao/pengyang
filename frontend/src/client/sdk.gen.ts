@@ -3,7 +3,7 @@
 import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
-import type { CoachesListCoachesResponse, CoachesCreateCoachData, CoachesCreateCoachResponse, CoachesUpdateCoachData, CoachesUpdateCoachResponse, CoachesDeleteCoachData, CoachesDeleteCoachResponse, ItemsReadItemsData, ItemsReadItemsResponse, ItemsCreateItemData, ItemsCreateItemResponse, ItemsReadItemData, ItemsReadItemResponse, ItemsUpdateItemData, ItemsUpdateItemResponse, ItemsDeleteItemData, ItemsDeleteItemResponse, LoginLoginAccessTokenData, LoginLoginAccessTokenResponse, LoginTestTokenResponse, LoginRecoverPasswordData, LoginRecoverPasswordResponse, LoginResetPasswordData, LoginResetPasswordResponse, LoginRecoverPasswordHtmlContentData, LoginRecoverPasswordHtmlContentResponse, MatchesCreateMatchData, MatchesCreateMatchResponse, MatchesListMatchesData, MatchesListMatchesResponse, MatchesUpdateMatchData, MatchesUpdateMatchResponse, MatchesDeleteMatchData, MatchesDeleteMatchResponse, MatchMediaUploadMatchPhotoData, MatchMediaUploadMatchPhotoResponse, MatchMediaAddMatchVideoLinkData, MatchMediaAddMatchVideoLinkResponse, MatchMediaDeleteMatchMediaData, MatchMediaDeleteMatchMediaResponse, MatchUpdatesCreateMatchUpdateData, MatchUpdatesCreateMatchUpdateResponse, MatchUpdatesDeleteMatchUpdateData, MatchUpdatesDeleteMatchUpdateResponse, PlayersListPlayersResponse, PlayersCreatePlayerData, PlayersCreatePlayerResponse, PlayersUpdatePlayerData, PlayersUpdatePlayerResponse, PlayersDeletePlayerData, PlayersDeletePlayerResponse, PrivateCreateUserData, PrivateCreateUserResponse, PublicGetLandingPageResponse, PublicGetTeamContentResponse, PublicGetCoachesResponse, PublicGetPlayersResponse, PublicGetMatchesData, PublicGetMatchesResponse, PublicGetMatchDetailData, PublicGetMatchDetailResponse, PublicGetMatchUpdatesData, PublicGetMatchUpdatesResponse, TeamContentGetTeamContentResponse, TeamContentUpdateTeamContentData, TeamContentUpdateTeamContentResponse, UsersReadUsersData, UsersReadUsersResponse, UsersCreateUserData, UsersCreateUserResponse, UsersReadUserMeResponse, UsersDeleteUserMeResponse, UsersUpdateUserMeData, UsersUpdateUserMeResponse, UsersUpdatePasswordMeData, UsersUpdatePasswordMeResponse, UsersRegisterUserData, UsersRegisterUserResponse, UsersReadUserByIdData, UsersReadUserByIdResponse, UsersUpdateUserData, UsersUpdateUserResponse, UsersDeleteUserData, UsersDeleteUserResponse, UtilsTestEmailData, UtilsTestEmailResponse, UtilsHealthCheckResponse } from './types.gen';
+import type { CoachesListCoachesResponse, CoachesCreateCoachData, CoachesCreateCoachResponse, CoachesUpdateCoachData, CoachesUpdateCoachResponse, CoachesDeleteCoachData, CoachesDeleteCoachResponse, ItemsReadItemsData, ItemsReadItemsResponse, ItemsCreateItemData, ItemsCreateItemResponse, ItemsReadItemData, ItemsReadItemResponse, ItemsUpdateItemData, ItemsUpdateItemResponse, ItemsDeleteItemData, ItemsDeleteItemResponse, LoginLoginAccessTokenData, LoginLoginAccessTokenResponse, LoginTestTokenResponse, LoginRecoverPasswordData, LoginRecoverPasswordResponse, LoginResetPasswordData, LoginResetPasswordResponse, LoginRecoverPasswordHtmlContentData, LoginRecoverPasswordHtmlContentResponse, MatchesCreateMatchData, MatchesCreateMatchResponse, MatchesListMatchesData, MatchesListMatchesResponse, MatchesGetMatchDetailData, MatchesGetMatchDetailResponse, MatchesUpdateMatchData, MatchesUpdateMatchResponse, MatchesDeleteMatchData, MatchesDeleteMatchResponse, MatchMediaUploadMatchPhotoData, MatchMediaUploadMatchPhotoResponse, MatchMediaAddMatchVideoLinkData, MatchMediaAddMatchVideoLinkResponse, MatchMediaDeleteMatchMediaData, MatchMediaDeleteMatchMediaResponse, MatchUpdatesGetMatchUpdatesData, MatchUpdatesGetMatchUpdatesResponse, MatchUpdatesCreateMatchUpdateData, MatchUpdatesCreateMatchUpdateResponse, MatchUpdatesDeleteMatchUpdateData, MatchUpdatesDeleteMatchUpdateResponse, PlayersListPlayersResponse, PlayersCreatePlayerData, PlayersCreatePlayerResponse, PlayersUpdatePlayerData, PlayersUpdatePlayerResponse, PlayersDeletePlayerData, PlayersDeletePlayerResponse, PrivateCreateUserData, PrivateCreateUserResponse, PublicGetLandingPageResponse, PublicGetTeamContentResponse, PublicGetCoachesResponse, PublicGetPlayersResponse, PublicGetMatchesData, PublicGetMatchesResponse, PublicGetMatchDetailData, PublicGetMatchDetailResponse, PublicGetMatchUpdatesData, PublicGetMatchUpdatesResponse, TeamContentGetTeamContentResponse, TeamContentUpdateTeamContentData, TeamContentUpdateTeamContentResponse, UsersReadUsersData, UsersReadUsersResponse, UsersCreateUserData, UsersCreateUserResponse, UsersReadUserMeResponse, UsersDeleteUserMeResponse, UsersUpdateUserMeData, UsersUpdateUserMeResponse, UsersUpdatePasswordMeData, UsersUpdatePasswordMeResponse, UsersRegisterUserData, UsersRegisterUserResponse, UsersReadUserByIdData, UsersReadUserByIdResponse, UsersUpdateUserData, UsersUpdateUserResponse, UsersDeleteUserData, UsersDeleteUserResponse, UtilsTestEmailData, UtilsTestEmailResponse, UtilsHealthCheckResponse } from './types.gen';
 
 export class CoachesService {
     /**
@@ -340,6 +340,27 @@ export class MatchesService {
     }
     
     /**
+     * Get Match Detail
+     * Match detail with updates and media (admin).
+     * @param data The data for the request.
+     * @param data.matchId
+     * @returns MatchDetailPublic Successful Response
+     * @throws ApiError
+     */
+    public static getMatchDetail(data: MatchesGetMatchDetailData): CancelablePromise<MatchesGetMatchDetailResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/matches/{match_id}',
+            path: {
+                match_id: data.matchId
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
+    /**
      * Update Match
      * Update a match (including status change).
      * @param data The data for the request.
@@ -459,6 +480,31 @@ export class MatchMediaService {
 }
 
 export class MatchUpdatesService {
+    /**
+     * Get Match Updates
+     * List match updates (admin).
+     * @param data The data for the request.
+     * @param data.matchId
+     * @param data.after
+     * @returns MatchUpdatesPublic Successful Response
+     * @throws ApiError
+     */
+    public static getMatchUpdates(data: MatchUpdatesGetMatchUpdatesData): CancelablePromise<MatchUpdatesGetMatchUpdatesResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/matches/{match_id}/updates',
+            path: {
+                match_id: data.matchId
+            },
+            query: {
+                after: data.after
+            },
+            errors: {
+                422: 'Validation Error'
+            }
+        });
+    }
+    
     /**
      * Create Match Update
      * Post a real-time update to a match.

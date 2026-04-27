@@ -280,6 +280,7 @@ class MatchBase(SQLModel):
     home_team: str = Field(min_length=1, max_length=255)
     away_team: str = Field(min_length=1, max_length=255)
     precautions: str | None = None
+    is_public: bool = Field(default=True, nullable=False)
 
 
 class Match(MatchBase, table=True):
@@ -321,6 +322,7 @@ class MatchPatch(SQLModel):
     home_team: str | None = Field(default=None, min_length=1, max_length=255)
     away_team: str | None = Field(default=None, min_length=1, max_length=255)
     precautions: str | None = None
+    is_public: bool | None = None
     status: MatchStatus | None = None
     home_score: int | None = None
     away_score: int | None = None
@@ -431,7 +433,13 @@ class MatchDetailPublic(MatchPublic):
     media: list[MatchMediaPublic] = []
 
 
+class MatchHighlight(MatchPublic):
+    """Match with a limited set of photos for landing-page highlights."""
+
+    photos: list[MatchMediaPublic] = []
+
+
 class LandingPageData(SQLModel):
     upcoming_matches: list[MatchPublic]
-    recent_matches: list[MatchPublic]
+    recent_matches: list[MatchHighlight]
     team_name: str

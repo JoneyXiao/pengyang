@@ -4,14 +4,15 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.api.deps import SessionDep
 from app import crud
+from app.api.deps import SessionDep
 from app.models import (
     CoachesPublic,
     CoachPublic,
     LandingPageData,
     MatchDetailPublic,
     MatchesPublic,
+    MatchHighlight,
     MatchMediaPublic,
     MatchPublic,
     MatchUpdatePublic,
@@ -27,11 +28,24 @@ router = APIRouter(prefix="/public", tags=["public"])
 @router.get("/landing", response_model=LandingPageData)
 def get_landing_page(session: SessionDep) -> Any:
     """Landing page aggregate data."""
-    upcoming, _ = crud.get_matches(session=session, status="upcoming", limit=5)
-    recent, _ = crud.get_matches(session=session, status="completed", limit=5)
+    upcoming, _ = crud.get_matches(
+        session=session, status="upcoming", public_only=True, limit=5
+    )
+    recent, _ = crud.get_matches(
+        session=session, status="completed", public_only=True, limit=3
+    )
+    highlights: list[MatchHighlight] = []
+    for m in recent:
+        photos = crud.get_match_photos(session=session, match_id=m.id, limit=10)
+        highlights.append(
+            MatchHighlight(
+                **MatchPublic.model_validate(m).model_dump(),
+                photos=[MatchMediaPublic.model_validate(p) for p in photos],
+            )
+        )
     return LandingPageData(
         upcoming_matches=[MatchPublic.model_validate(m) for m in upcoming],
-        recent_matches=[MatchPublic.model_validate(m) for m in recent],
+        recent_matches=highlights,
         team_name="深圳市龙华区观湖实验学校 - 鹏飏",
     )
 
@@ -99,7 +113,11 @@ def get_matches(
 ) -> Any:
     """List all matches (public)."""
     matches, count = crud.get_matches(
-        session=session, status=status, skip=skip, limit=limit
+        session=session,
+        status=status,
+        public_only=True,
+        skip=skip,
+        limit=limit,
     )
     return MatchesPublic(
         data=[MatchPublic.model_validate(m) for m in matches],
@@ -111,7 +129,7 @@ def get_matches(
 def get_match_detail(session: SessionDep, match_id: uuid.UUID) -> Any:
     """Match detail with updates and media."""
     match = crud.get_match(session=session, match_id=match_id)
-    if not match:
+    if not match or not match.is_public:
         raise HTTPException(status_code=404, detail="Match not found")
     updates = crud.get_match_updates(session=session, match_id=match_id)
     medias = crud.get_match_medias(session=session, match_id=match_id)
@@ -130,7 +148,7 @@ def get_match_updates(
 ) -> Any:
     """Match updates (used for polling)."""
     match = crud.get_match(session=session, match_id=match_id)
-    if not match:
+    if not match or not match.is_public:
         raise HTTPException(status_code=404, detail="Match not found")
     updates = crud.get_match_updates(session=session, match_id=match_id, after=after)
     return MatchUpdatesPublic(

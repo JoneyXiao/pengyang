@@ -5,7 +5,9 @@ from fastapi.testclient import TestClient
 from app.core.config import settings
 
 
-def _create_match(client: TestClient, headers: dict[str, str]) -> str:
+def _create_match(
+    client: TestClient, headers: dict[str, str], *, is_public: bool = True
+) -> str:
     r = client.post(
         f"{settings.API_V1_STR}/matches/",
         headers=headers,
@@ -13,6 +15,7 @@ def _create_match(client: TestClient, headers: dict[str, str]) -> str:
             "match_date": "2025-03-15T14:00:00",
             "home_team": "鹏飏足球",
             "away_team": "对手队",
+            "is_public": is_public,
         },
     )
     assert r.status_code == 201
@@ -33,6 +36,36 @@ def test_upload_match_photo(
     data = r.json()
     assert data["media_type"] == "photo"
     assert data["file_path"] is not None
+
+
+def test_public_match_photo_file_is_served(
+    client: TestClient, superuser_token_headers: dict[str, str]
+) -> None:
+    match_id = _create_match(client, superuser_token_headers)
+    fake_image = io.BytesIO(b"\x89PNG\r\n\x1a\n" + b"\x00" * 100)
+    r = client.post(
+        f"{settings.API_V1_STR}/matches/{match_id}/media/photos",
+        headers=superuser_token_headers,
+        files={"photo": ("test.png", fake_image, "image/png")},
+    )
+    assert r.status_code == 201
+    file_response = client.get(r.json()["file_path"])
+    assert file_response.status_code == 200
+
+
+def test_private_match_photo_file_returns_404(
+    client: TestClient, superuser_token_headers: dict[str, str]
+) -> None:
+    match_id = _create_match(client, superuser_token_headers, is_public=False)
+    fake_image = io.BytesIO(b"\x89PNG\r\n\x1a\n" + b"\x00" * 100)
+    r = client.post(
+        f"{settings.API_V1_STR}/matches/{match_id}/media/photos",
+        headers=superuser_token_headers,
+        files={"photo": ("test.png", fake_image, "image/png")},
+    )
+    assert r.status_code == 201
+    file_response = client.get(r.json()["file_path"])
+    assert file_response.status_code == 404
 
 
 def test_add_match_video_link(

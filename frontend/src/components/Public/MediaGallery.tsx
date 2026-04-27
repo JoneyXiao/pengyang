@@ -1,4 +1,10 @@
 import type { MatchMediaPublic } from "@/client"
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface MediaGalleryProps {
   media: MatchMediaPublic[]
@@ -26,27 +32,43 @@ export function MediaGallery({ media }: MediaGalleryProps) {
           </h4>
           <div className="grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4">
             {photos.map((photo) => (
-              <a
-                key={photo.id}
-                href={photo.file_path ?? "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative overflow-hidden"
-              >
-                <img
-                  src={photo.file_path ?? ""}
-                  alt={photo.caption || "比赛照片"}
-                  className="aspect-square w-full object-cover grayscale transition-all duration-300 group-hover:scale-105 group-hover:grayscale-0"
-                  loading="lazy"
-                />
-                {photo.caption && (
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-2 opacity-0 transition-opacity group-hover:opacity-100">
-                    <p className="truncate font-body text-xs text-white">
+              <Dialog key={photo.id}>
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    className="group relative w-full cursor-pointer overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+                  >
+                    <img
+                      src={photo.file_path ?? ""}
+                      alt={photo.caption || "比赛照片"}
+                      className="aspect-square w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-2 opacity-0 transition-opacity group-hover:opacity-100">
+                        <p className="truncate font-body text-xs text-white">
+                          {photo.caption}
+                        </p>
+                      </div>
+                    )}
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="max-w-[calc(100vw-2rem)] border-0 bg-transparent p-0 shadow-none sm:max-w-5xl">
+                  <DialogTitle className="sr-only">
+                    {photo.caption || "比赛照片"}
+                  </DialogTitle>
+                  <img
+                    src={photo.file_path ?? ""}
+                    alt={photo.caption || "比赛照片"}
+                    className="max-h-[85vh] w-full object-contain"
+                  />
+                  {photo.caption && (
+                    <p className="px-2 pb-1 text-center font-body text-sm text-white">
                       {photo.caption}
                     </p>
-                  </div>
-                )}
-              </a>
+                  )}
+                </DialogContent>
+              </Dialog>
             ))}
           </div>
         </div>

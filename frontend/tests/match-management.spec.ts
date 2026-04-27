@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test"
+import { expect, type Page, test } from "@playwright/test"
 
 const MATCH_DATE_ID = "match_date"
 const AWAY_TEAM_ID = "away_team"
@@ -9,7 +9,13 @@ function futureDate(): string {
   return d.toISOString().slice(0, 16)
 }
 
+function getMatchRow(page: Page, opponentName: string) {
+  return page.getByTestId("match-row").filter({ hasText: opponentName }).first()
+}
+
 test.describe("Match management dashboard", () => {
+  test.describe.configure({ mode: "serial" })
+
   test.beforeEach(async ({ page }) => {
     await page.goto("/dashboard")
     await page.waitForLoadState("networkidle")
@@ -25,14 +31,23 @@ test.describe("Match management dashboard", () => {
 
   test("Create a new match", async ({ page }) => {
     const opponentName = `测试对手-${Date.now()}`
+    const visibilityCheckbox = page
+      .getByRole("checkbox", { name: "公开展示比赛数据" })
+      .first()
 
     await page.locator(`#${MATCH_DATE_ID}`).fill(futureDate())
     await page.locator(`#${AWAY_TEAM_ID}`).fill(opponentName)
+    await expect(visibilityCheckbox).toBeChecked()
+    await visibilityCheckbox.click()
+    await expect(visibilityCheckbox).not.toBeChecked()
 
     await page.getByRole("button", { name: "发布比赛" }).click()
 
     await expect(page.getByText("比赛已创建")).toBeVisible()
     await expect(page.getByText(opponentName)).toBeVisible()
+    await expect(
+      getMatchRow(page, opponentName).getByText("未公开"),
+    ).toBeVisible()
   })
 
   test("Edit a match inline", async ({ page }) => {
@@ -43,10 +58,7 @@ test.describe("Match management dashboard", () => {
     await page.getByRole("button", { name: "发布比赛" }).click()
     await expect(page.getByText("比赛已创建")).toBeVisible()
 
-    const matchRow = page
-      .locator("div")
-      .filter({ hasText: opponentName })
-      .last()
+    const matchRow = getMatchRow(page, opponentName)
     await matchRow.getByRole("button", { name: "编辑" }).click()
 
     const editForm = page.locator("#edit_away_team")
@@ -54,10 +66,17 @@ test.describe("Match management dashboard", () => {
 
     const updatedName = `${opponentName}-已编辑`
     await editForm.fill(updatedName)
-    await page.getByRole("button", { name: "保存" }).click()
+    const visibilityCheckbox = matchRow.getByRole("checkbox", {
+      name: "公开展示比赛数据",
+    })
+    await expect(visibilityCheckbox).toBeChecked()
+    await visibilityCheckbox.click()
+    await expect(visibilityCheckbox).not.toBeChecked()
+    await matchRow.getByRole("button", { name: "保存" }).click()
 
     await expect(page.getByText("比赛已更新")).toBeVisible()
     await expect(page.getByText(updatedName)).toBeVisible()
+    await expect(matchRow.getByText("未公开")).toBeVisible()
   })
 
   test("Toggle match status (upcoming → live → completed)", async ({
@@ -70,10 +89,7 @@ test.describe("Match management dashboard", () => {
     await page.getByRole("button", { name: "发布比赛" }).click()
     await expect(page.getByText("比赛已创建")).toBeVisible()
 
-    const matchRow = page
-      .locator("div")
-      .filter({ hasText: opponentName })
-      .last()
+    const matchRow = getMatchRow(page, opponentName)
 
     await matchRow.getByRole("button", { name: "开始比赛" }).click()
     await expect(page.getByText("比赛已更新")).toBeVisible()
@@ -90,10 +106,7 @@ test.describe("Match management dashboard", () => {
     await page.getByRole("button", { name: "发布比赛" }).click()
     await expect(page.getByText("比赛已创建")).toBeVisible()
 
-    const matchRow = page
-      .locator("div")
-      .filter({ hasText: opponentName })
-      .last()
+    const matchRow = getMatchRow(page, opponentName)
 
     await matchRow.getByRole("button", { name: "删除" }).click()
 

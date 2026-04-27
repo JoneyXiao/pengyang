@@ -1,12 +1,12 @@
 import { Briefcase, ExternalLink, Trophy } from "lucide-react"
 
 import { SidebarAppearance } from "@/components/Common/Appearance"
-import { Logo } from "@/components/Common/Logo"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { adminNavItems } from "@/config/nav"
 import useAuth from "@/hooks/useAuth"
@@ -28,8 +28,10 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="px-4 py-6 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:items-center">
-        <Logo variant="responsive" />
+      <SidebarHeader className="px-4 py-4 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:px-0">
+        <div className="hidden w-full justify-end group-data-[collapsible=icon]:justify-center lg:flex">
+          <SidebarTrigger className="text-muted-foreground" />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <Main items={items} />

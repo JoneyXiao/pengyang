@@ -95,7 +95,7 @@ export type ItemUpdate = {
 
 export type LandingPageData = {
     upcoming_matches: Array<MatchPublic>;
-    recent_matches: Array<MatchPublic>;
+    recent_matches: Array<MatchHighlight>;
     team_name: string;
 };
 
@@ -104,6 +104,7 @@ export type MatchCreate = {
     home_team: string;
     away_team: string;
     precautions?: (string | null);
+    is_public?: boolean;
 };
 
 /**
@@ -114,6 +115,7 @@ export type MatchDetailPublic = {
     home_team: string;
     away_team: string;
     precautions?: (string | null);
+    is_public?: boolean;
     id: string;
     status: string;
     home_score?: (number | null);
@@ -125,6 +127,22 @@ export type MatchDetailPublic = {
 export type MatchesPublic = {
     data: Array<MatchPublic>;
     count: number;
+};
+
+/**
+ * Match with a limited set of photos for landing-page highlights.
+ */
+export type MatchHighlight = {
+    match_date: string;
+    home_team: string;
+    away_team: string;
+    precautions?: (string | null);
+    is_public?: boolean;
+    id: string;
+    status: string;
+    home_score?: (number | null);
+    away_score?: (number | null);
+    photos?: Array<MatchMediaPublic>;
 };
 
 export type MatchMediaPublic = {
@@ -151,6 +169,7 @@ export type MatchPatch = {
     home_team?: (string | null);
     away_team?: (string | null);
     precautions?: (string | null);
+    is_public?: (boolean | null);
     status?: (MatchStatus | null);
     home_score?: (number | null);
     away_score?: (number | null);
@@ -161,6 +180,7 @@ export type MatchPublic = {
     home_team: string;
     away_team: string;
     precautions?: (string | null);
+    is_public?: boolean;
     id: string;
     status: string;
     home_score?: (number | null);
@@ -402,6 +422,12 @@ export type MatchesListMatchesData = {
 
 export type MatchesListMatchesResponse = (MatchesPublic);
 
+export type MatchesGetMatchDetailData = {
+    matchId: string;
+};
+
+export type MatchesGetMatchDetailResponse = (MatchDetailPublic);
+
 export type MatchesUpdateMatchData = {
     matchId: string;
     requestBody: MatchPatch;
@@ -435,6 +461,13 @@ export type MatchMediaDeleteMatchMediaData = {
 };
 
 export type MatchMediaDeleteMatchMediaResponse = (Message);
+
+export type MatchUpdatesGetMatchUpdatesData = {
+    after?: (string | null);
+    matchId: string;
+};
+
+export type MatchUpdatesGetMatchUpdatesResponse = (MatchUpdatesPublic);
 
 export type MatchUpdatesCreateMatchUpdateData = {
     matchId: string;

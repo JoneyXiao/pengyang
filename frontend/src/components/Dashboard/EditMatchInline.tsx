@@ -1,4 +1,5 @@
 import type { MatchPatch, MatchPublic } from "@/client"
+import { Checkbox } from "@/components/ui/checkbox"
 import { BEIJING_TZ_OFFSET, toBeijingDatetimeLocal } from "./shared"
 
 export function EditMatchInline({
@@ -31,6 +32,7 @@ export function EditMatchInline({
       away_score: fd.get("away_score")
         ? Number(fd.get("away_score"))
         : undefined,
+      is_public: fd.get("is_public") === "on",
     }
     onSave(body)
   }
@@ -38,13 +40,13 @@ export function EditMatchInline({
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-4 border-t-2 border-[#E5E5E5] pt-4"
+      className="mt-4 border-t-1 border-border pt-4"
     >
       <div className="grid gap-3 md:grid-cols-3">
         <div>
           <label
             htmlFor="edit_match_date"
-            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             比赛时间
           </label>
@@ -53,13 +55,13 @@ export function EditMatchInline({
             name="match_date"
             type="datetime-local"
             defaultValue={toBeijingDatetimeLocal(match.match_date)}
-            className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+            className="w-full rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
           />
         </div>
         <div>
           <label
             htmlFor="edit_home_team"
-            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             主队
           </label>
@@ -67,13 +69,13 @@ export function EditMatchInline({
             id="edit_home_team"
             name="home_team"
             defaultValue={match.home_team}
-            className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+            className="w-full rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
           />
         </div>
         <div>
           <label
             htmlFor="edit_away_team"
-            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             客队
           </label>
@@ -81,13 +83,13 @@ export function EditMatchInline({
             id="edit_away_team"
             name="away_team"
             defaultValue={match.away_team}
-            className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+            className="w-full rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
           />
         </div>
         <div>
           <label
             htmlFor="edit_home_score"
-            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             主队比分
           </label>
@@ -97,13 +99,13 @@ export function EditMatchInline({
             type="number"
             min={0}
             defaultValue={match.home_score ?? ""}
-            className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+            className="w-full rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
           />
         </div>
         <div>
           <label
             htmlFor="edit_away_score"
-            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             客队比分
           </label>
@@ -113,13 +115,13 @@ export function EditMatchInline({
             type="number"
             min={0}
             defaultValue={match.away_score ?? ""}
-            className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+            className="w-full rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
           />
         </div>
         <div>
           <label
             htmlFor="edit_precautions"
-            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-[#707072]"
+            className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
           >
             注意事项
           </label>
@@ -127,15 +129,38 @@ export function EditMatchInline({
             id="edit_precautions"
             name="precautions"
             defaultValue={match.precautions ?? ""}
-            className="w-full rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+            className="w-full rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
           />
+        </div>
+        <div className="md:col-span-3">
+          <label
+            htmlFor="edit_is_public"
+            className="flex items-start gap-3 rounded-lg border-1 border-border bg-card p-3 transition-colors hover:border-ring"
+          >
+            <Checkbox
+              id="edit_is_public"
+              name="is_public"
+              defaultChecked={match.is_public !== false}
+            />
+            <span className="flex flex-col gap-1">
+              <span
+                className="font-display text-xs tracking-wide text-foreground"
+                style={{ fontWeight: 700 }}
+              >
+                公开展示比赛数据
+              </span>
+              <span className="font-body text-xs text-muted-foreground">
+                关闭后，公众页面将隐藏该比赛的赛程、比分、动态和媒体。
+              </span>
+            </span>
+          </label>
         </div>
       </div>
       <div className="mt-3 flex gap-2">
         <button
           type="submit"
           disabled={isPending}
-          className="rounded-[30px] bg-[#111111] px-5 py-2 font-display text-xs tracking-wide text-white transition-colors hover:bg-[#292929] disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+          className="rounded-[30px] bg-primary px-5 py-2 font-display text-xs tracking-wide text-primary-foreground transition-colors hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           style={{ fontWeight: 700 }}
         >
           保存
@@ -143,7 +168,7 @@ export function EditMatchInline({
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-[30px] border-2 border-[#E5E5E5] px-5 py-2 font-display text-xs tracking-wide text-[#707072] transition-colors hover:border-[#111111] hover:text-[#111111] outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+          className="rounded-[30px] border-1 border-border px-5 py-2 font-display text-xs tracking-wide text-muted-foreground transition-colors hover:border-ring hover:text-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           style={{ fontWeight: 700 }}
         >
           取消

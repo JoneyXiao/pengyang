@@ -23,9 +23,9 @@ function calcTimeLeft(target: string): TimeLeft {
 
 function Segment({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex min-w-0 flex-col items-center">
       <span
-        className="font-display text-4xl tabular-nums tracking-tight md:text-5xl lg:text-6xl"
+        className="font-display text-4xl tabular-nums tracking-tight sm:text-5xl xl:text-6xl"
         style={{ fontWeight: 900, lineHeight: 1 }}
       >
         {String(value).padStart(2, "0")}
@@ -40,7 +40,7 @@ function Segment({ value, label }: { value: number; label: string }) {
 function Colon() {
   return (
     <span
-      className="font-display text-3xl text-[#FA5400] md:text-4xl lg:text-5xl"
+      className="font-display text-3xl text-[#FA5400] sm:text-4xl xl:text-5xl"
       style={{ fontWeight: 900, lineHeight: 1 }}
     >
       :
@@ -86,7 +86,7 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }
 
   return (
-    <div className="flex items-center justify-center gap-3 md:gap-4">
+    <div className="flex w-full min-w-0 items-center justify-center gap-1.5 sm:gap-2 md:gap-3 xl:gap-4">
       <Segment value={timeLeft.days} label="天" />
       <Colon />
       <Segment value={timeLeft.hours} label="时" />

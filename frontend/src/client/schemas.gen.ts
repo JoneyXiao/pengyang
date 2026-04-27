@@ -576,7 +576,7 @@ export const LandingPageDataSchema = {
         },
         recent_matches: {
             items: {
-                '$ref': '#/components/schemas/MatchPublic'
+                '$ref': '#/components/schemas/MatchHighlight'
             },
             type: 'array',
             title: 'Recent Matches'
@@ -620,6 +620,11 @@ export const MatchCreateSchema = {
                 }
             ],
             title: 'Precautions'
+        },
+        is_public: {
+            type: 'boolean',
+            title: 'Is Public',
+            default: true
         }
     },
     type: 'object',
@@ -656,6 +661,11 @@ export const MatchDetailPublicSchema = {
                 }
             ],
             title: 'Precautions'
+        },
+        is_public: {
+            type: 'boolean',
+            title: 'Is Public',
+            default: true
         },
         id: {
             type: 'string',
@@ -709,6 +719,87 @@ export const MatchDetailPublicSchema = {
     required: ['match_date', 'home_team', 'away_team', 'id', 'status'],
     title: 'MatchDetailPublic',
     description: 'Match detail including updates and media.'
+} as const;
+
+export const MatchHighlightSchema = {
+    properties: {
+        match_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Match Date'
+        },
+        home_team: {
+            type: 'string',
+            maxLength: 255,
+            minLength: 1,
+            title: 'Home Team'
+        },
+        away_team: {
+            type: 'string',
+            maxLength: 255,
+            minLength: 1,
+            title: 'Away Team'
+        },
+        precautions: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Precautions'
+        },
+        is_public: {
+            type: 'boolean',
+            title: 'Is Public',
+            default: true
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        status: {
+            type: 'string',
+            title: 'Status'
+        },
+        home_score: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Home Score'
+        },
+        away_score: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Away Score'
+        },
+        photos: {
+            items: {
+                '$ref': '#/components/schemas/MatchMediaPublic'
+            },
+            type: 'array',
+            title: 'Photos',
+            default: []
+        }
+    },
+    type: 'object',
+    required: ['match_date', 'home_team', 'away_team', 'id', 'status'],
+    title: 'MatchHighlight',
+    description: 'Match with a limited set of photos for landing-page highlights.'
 } as const;
 
 export const MatchMediaPublicSchema = {
@@ -866,6 +957,17 @@ export const MatchPatchSchema = {
             ],
             title: 'Precautions'
         },
+        is_public: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Public'
+        },
         status: {
             anyOf: [
                 {
@@ -933,6 +1035,11 @@ export const MatchPublicSchema = {
                 }
             ],
             title: 'Precautions'
+        },
+        is_public: {
+            type: 'boolean',
+            title: 'Is Public',
+            default: true
         },
         id: {
             type: 'string',

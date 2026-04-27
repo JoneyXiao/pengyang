@@ -73,7 +73,6 @@ function PlayersManagement() {
             setShowForm(true)
             setEditingId(null)
           }}
-          className="bg-[#111111] text-white hover:bg-[#292929]"
         >
           添加球员
         </Button>
@@ -82,7 +81,7 @@ function PlayersManagement() {
       {showForm && (
         <form
           onSubmit={handleSubmit}
-          className="mb-8 rounded-lg border border-[#E5E5E5] p-6"
+          className="mb-8 rounded-lg border border-border bg-card p-6"
         >
           <h2 className="mb-4 text-lg font-semibold">
             {editingId ? "编辑球员" : "添加球员"}
@@ -96,7 +95,7 @@ function PlayersManagement() {
                 id="name"
                 name="name"
                 required
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -110,7 +109,7 @@ function PlayersManagement() {
                 id="first_name"
                 name="first_name"
                 required
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -123,7 +122,7 @@ function PlayersManagement() {
               <input
                 id="position"
                 name="position"
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors placeholder:text-muted-foreground focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                 placeholder="如：前锋、守门员"
               />
             </div>
@@ -140,7 +139,7 @@ function PlayersManagement() {
                 type="number"
                 min={1}
                 max={99}
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div className="md:col-span-2">
@@ -154,7 +153,7 @@ function PlayersManagement() {
                 id="biography"
                 name="biography"
                 rows={3}
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -169,7 +168,7 @@ function PlayersManagement() {
                 name="sort_order"
                 type="number"
                 defaultValue={0}
-                className="w-full rounded-lg border border-[#E5E5E5] bg-[#F5F5F5] px-4 py-2"
+                className="w-full rounded-lg border border-input bg-background px-4 py-2 transition-colors focus:border-ring focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
             </div>
             <div>
@@ -189,7 +188,7 @@ function PlayersManagement() {
                 id="has_parental_consent"
                 name="has_parental_consent"
                 type="checkbox"
-                className="h-5 w-5 rounded border-[#E5E5E5]"
+                className="size-5 rounded border-input accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
               />
               <label
                 htmlFor="has_parental_consent"
@@ -200,12 +199,7 @@ function PlayersManagement() {
             </div>
           </div>
           <div className="mt-4 flex gap-2">
-            <Button
-              type="submit"
-              className="bg-[#111111] text-white hover:bg-[#292929]"
-            >
-              保存
-            </Button>
+            <Button type="submit">保存</Button>
             <Button
               type="button"
               variant="outline"
@@ -231,7 +225,7 @@ function PlayersManagement() {
           {data.data.map((player) => (
             <div
               key={player.id}
-              className="flex items-center justify-between rounded-lg border border-[#E5E5E5] p-4"
+              className="flex items-center justify-between rounded-lg border border-border bg-card p-4"
             >
               <div className="flex items-center gap-4">
                 {player.photo_url ? (
@@ -242,7 +236,7 @@ function PlayersManagement() {
                     className="h-12 w-12 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5F5F5] text-[#707072] font-bold">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground font-bold">
                     {player.jersey_number ?? player.name?.charAt(0)}
                   </div>
                 )}

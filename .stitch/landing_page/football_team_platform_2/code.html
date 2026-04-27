@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>观湖实验学校足球队 - 首页</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "disabled-text": "#8D8D8F",
+                        "primary-hover": "#292929",
+                        "neutral-text": "#707072",
+                        "on-background": "#1c1b1b",
+                        "surface-tint": "#5f5e5e",
+                        "border": "#E5E5E5",
+                        "secondary": "#aa3700",
+                        "error": "#D43F21",
+                        "surface-container": "#f1edec",
+                        "on-tertiary-container": "#868381",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "surface": "#F5F5F5",
+                        "on-surface-variant": "#444748",
+                        "surface-container-high": "#ebe7e6",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-primary-container": "#858383",
+                        "disabled-bg": "#CACACB",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#000000",
+                        "surface-container-low": "#f7f3f2",
+                        "warning": "#FFC107",
+                        "on-secondary-fixed-variant": "#822800",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#380c00",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "surface-dim": "#ddd9d8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "inverse-primary": "#c8c6c5",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "primary-container": "#1c1b1b",
+                        "on-secondary": "#ffffff",
+                        "primary": "#000000",
+                        "tertiary-fixed": "#e6e1df",
+                        "on-primary-fixed-variant": "#474646",
+                        "secondary-fixed": "#ffdbcf",
+                        "tertiary-container": "#1d1b1a",
+                        "background": "#FFFFFF",
+                        "surface-bright": "#fdf8f8",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1c1b1b",
+                        "secondary-container": "#ff5706",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "outline": "#747878",
+                        "on-secondary-container": "#511500",
+                        "success": "#128A09"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        xl: "32px",
+                        lg: "24px",
+                        "margin-max": "120px",
+                        md: "16px",
+                        section: "48px",
+                        base: "4px",
+                        xs: "8px",
+                        hero: "96px",
+                        sm: "12px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Jost"],
+                        "headline-sm": ["Jost"],
+                        "nav-link": ["Inter"],
+                        "product-title": ["Jost"],
+                        "display-hero": ["Jost"],
+                        "label-caps": ["Inter"],
+                        "body-secondary": ["Inter"],
+                        "body-main": ["Inter"],
+                        "headline-lg": ["Jost"]
+                    },
+                    fontSize: {
+                        "headline-md": ["36px", { lineHeight: "1.1", fontWeight: "700" }],
+                        "headline-sm": ["24px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "nav-link": ["16px", { lineHeight: "1.5", fontWeight: "500" }],
+                        "product-title": ["16px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "display-hero": ["120px", { lineHeight: "0.95", letterSpacing: "-0.02em", fontWeight: "900" }],
+                        "label-caps": ["12px", { lineHeight: "1.0", fontWeight: "600" }],
+                        "body-secondary": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "body-main": ["15px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-lg": ["48px", { lineHeight: "0.95", letterSpacing: "-0.02em", fontWeight: "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-main antialiased selection:bg-secondary-container selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 h-[64px] border-b bg-white/95 backdrop-blur-md border-b-2 border-black">
+<div class="flex justify-between items-center px-6 max-w-[1440px] mx-auto w-full h-full">
+<div class="text-2xl font-black italic tracking-tighter text-black">
+                观湖实验学校足球队
+            </div>
+<nav class="hidden md:flex items-center gap-xl h-full font-lexend uppercase tracking-tighter">
+<a class="h-full flex items-center text-black border-b-4 border-black font-bold pb-1 transform scale-95 transition-transform duration-150" href="#">首页</a>
+<a class="h-full flex items-center text-gray-500 hover:text-black hover:bg-gray-100 transition-colors px-4" href="#">球队介绍</a>
+<a class="h-full flex items-center text-gray-500 hover:text-black hover:bg-gray-100 transition-colors px-4" href="#">阵容</a>
+<a class="h-full flex items-center text-gray-500 hover:text-black hover:bg-gray-100 transition-colors px-4" href="#">赛事管理</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="mt-[64px] w-full min-h-[819px] relative bg-black flex items-end pb-16">
+<div class="absolute inset-0 z-0">
+<img alt="High contrast black and white photo of a football player mid-kick in a stadium under stark spotlights" class="w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="High contrast black and white photo of a football player mid-kick in a stadium under stark spotlights, aggressive lighting, dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSdriyndTzdEAhcVCkgG7fTt-kQlcdKX7kFu9fOGSsJt8F19R5EY9vPFttUbESWNi8z-xu6AzX-9FHKKR7VJ66lXR-XTtiwKHz0tt1R1EqcxUiz_-O6foyFc0Janjvb9sLlx3jAO_FkgWAb7wl7n7fkiGP_UxTF5qf1zKEQb3iPUWN0ml8IhXMzEnGHwN6etu5f-MjBdy6a_uouy9NfQbHT5sKxFuduXLttHd27Q1g83R4WL9GiCkpPwHMkoVc_43fjeSHw2IOFK0X"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-[1440px] mx-auto px-6 flex flex-col gap-6">
+<div class="inline-flex w-fit items-center gap-2 bg-secondary-container px-4 py-2 text-white font-label-caps text-label-caps uppercase tracking-wider">
+<span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                赛季进行中
+            </div>
+<h1 class="font-display-hero text-display-hero text-white max-w-4xl uppercase leading-none">
+                无惧挑战<br/>
+<span class="text-secondary-container">铸就辉煌</span>
+</h1>
+<p class="font-body-main text-body-main text-surface-container max-w-xl text-lg opacity-90 mt-4">
+                深圳市龙华区观湖实验学校足球队官方平台。汇聚最新赛事、球队动态与核心阵容信息。以拼搏之姿，捍卫主场荣誉。
+            </p>
+<div class="flex items-center gap-4 mt-8">
+<button class="h-[48px] px-8 bg-white text-black font-label-caps text-label-caps uppercase tracking-wider rounded-[30px] hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+                    查看最新战报
+                </button>
+<button class="h-[48px] px-8 bg-transparent text-white border border-white font-label-caps text-label-caps uppercase tracking-wider rounded-[30px] hover:bg-white/10 transition-all duration-200">
+                    了解球队
+                </button>
+</div>
+</div>
+</section>
+<!-- Upcoming Match Countdown (Bento Style) -->
+<section class="w-full max-w-[1440px] mx-auto px-6 py-section">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-base">
+<!-- Match Details -->
+<div class="col-span-1 md:col-span-2 bg-surface p-xl border border-border flex flex-col justify-between group hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<div>
+<p class="font-label-caps text-label-caps text-secondary-container uppercase tracking-widest mb-2">下一场较量 / NEXT MATCH</p>
+<h2 class="font-headline-lg text-headline-lg text-primary uppercase">城市联赛半决赛</h2>
+</div>
+<div class="bg-black text-white px-4 py-2 font-label-caps text-label-caps">
+                        10月25日 14:30
+                    </div>
+</div>
+<div class="flex items-center justify-between border-t border-border pt-8">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-black rounded-full flex items-center justify-center text-white font-headline-sm text-headline-sm">观</div>
+<span class="font-headline-md text-headline-md text-primary">VS</span>
+<div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface font-headline-sm text-headline-sm border border-border">外</div>
+</div>
+<div class="text-right">
+<p class="font-body-secondary text-body-secondary text-neutral-text">主场作战</p>
+<p class="font-body-main text-body-main text-primary font-bold">龙华区体育中心</p>
+</div>
+</div>
+</div>
+<!-- Countdown Timer -->
+<div class="col-span-1 bg-black p-xl flex flex-col justify-center items-center text-white text-center">
+<span class="material-symbols-outlined text-4xl text-secondary-container mb-4">timer</span>
+<p class="font-label-caps text-label-caps text-surface-dim uppercase tracking-widest mb-6">距离开赛还有</p>
+<div class="flex gap-4 font-headline-lg text-headline-lg">
+<div class="flex flex-col items-center">
+<span>03</span>
+<span class="font-label-caps text-label-caps text-surface-dim mt-1 text-[10px]">天</span>
+</div>
+<span class="text-surface-tint">:</span>
+<div class="flex flex-col items-center">
+<span>14</span>
+<span class="font-label-caps text-label-caps text-surface-dim mt-1 text-[10px]">时</span>
+</div>
+<span class="text-surface-tint">:</span>
+<div class="flex flex-col items-center">
+<span class="text-secondary-container">45</span>
+<span class="font-label-caps text-label-caps text-surface-dim mt-1 text-[10px]">分</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest Highlights (Bento Grid) -->
+<section class="w-full max-w-[1440px] mx-auto px-6 py-section">
+<div class="flex justify-between items-end mb-8 border-b-2 border-black pb-4">
+<h2 class="font-headline-md text-headline-md text-primary uppercase">赛场高光</h2>
+<a class="font-label-caps text-label-caps text-primary hover:text-secondary-container transition-colors uppercase tracking-wider flex items-center gap-1" href="#">
+                全部战报 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-base h-[600px]">
+<!-- Featured Highlight -->
+<div class="col-span-1 md:col-span-2 row-span-2 relative group overflow-hidden cursor-pointer bg-black">
+<img alt="Intense football match moment, player celebrating a goal, sharp focus, high contrast monochrome with orange accents" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 mix-blend-luminosity" data-alt="Intense football match moment, player celebrating a goal, sharp focus, high contrast monochrome with orange accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBvNtRdjTxxVvY2qNednAd-wEvO-rF6w6N4gFN00fhpWm-JqoZ4UVQeEShs_-MbNp3h6k44YzjIZ0TPv80sxLZc0s8DCH7kZ1pNWnuFxYy4d2o4Vuk-2OZJqc9bceItxqZeX7kwfvpL-WwK_N4_kLCyTgqjZDfrD9VNgzTn42dG65Mqa4hPaqW2HJ40W53tZzuVqHOt1uggHh-Yp3QW9M-TL4XNblqT_7JZ78EetdtW7uNWR21_Xxp8mykmkCsMOW7IcEUxWnnO3d5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full">
+<span class="inline-block bg-white text-black px-2 py-1 font-label-caps text-label-caps text-[10px] uppercase mb-3">高光时刻</span>
+<h3 class="font-headline-sm text-headline-sm text-white mb-2 group-hover:text-secondary-container transition-colors">3-1 逆转取胜！小组赛全胜出线</h3>
+<p class="font-body-secondary text-body-secondary text-surface-dim line-clamp-2">在昨日结束的区级联赛小组赛最后一轮中，我校足球队在落后一球的情况下连扳三球，最终以小组第一身份强势挺进淘汰赛。</p>
+</div>
+</div>
+<!-- Small Highlight 1 -->
+<div class="col-span-1 row-span-1 relative group overflow-hidden cursor-pointer bg-surface border border-border">
+<img alt="Close up of football boots on artificial turf, stark lighting" class="w-full h-[60%] object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-500" data-alt="Close up of football boots on artificial turf, stark lighting, moody atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXODb0eq32w7L4MEGHkaBPGpKczIWono8JzktRlmxwXZwqE1y0esr5iuUjhh80IFrKFSiE5ZeCUNmOdntGo5L0bGHxPNcgfcsnNxP9_GMwlwfbk3ryNRf67PL6HDZYhHigvHHt85L_FDFJAzPpmSxR5Kuw_eGMOVTwjzo5Q8BSgSusje4e3WaibYRjyvkA-uNsEaJztDXUMRPtDJRoT27WdJoyfFjGRzWRhGXfthsr2RVuzuMpAPjJ30607sr1PoUBXcD2tlbHHJSY"/>
+<div class="p-4 h-[40%] flex flex-col justify-center">
+<span class="text-neutral-text font-label-caps text-label-caps text-[10px] mb-1 block">10月15日</span>
+<h4 class="font-product-title text-product-title text-primary line-clamp-2 group-hover:text-secondary-container transition-colors">李明远获选本月最佳球员</h4>
+</div>
+</div>
+<!-- Small Highlight 2 -->
+<div class="col-span-1 row-span-1 relative group overflow-hidden cursor-pointer bg-secondary-container text-white flex flex-col justify-center p-xl hover:-translate-y-1 transition-transform">
+<span class="material-symbols-outlined text-4xl mb-4">sports_soccer</span>
+<h4 class="font-headline-sm text-headline-sm mb-2">青训营招新开启</h4>
+<p class="font-body-secondary text-body-secondary opacity-90">为下赛季储备力量，U12梯队选拔本周正式启动。</p>
+<div class="mt-auto pt-4 border-t border-white/20">
+<span class="font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1">
+                        了解详情 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</span>
+</div>
+</div>
+<!-- Small Highlight 3 -->
+<div class="col-span-1 md:col-span-2 row-span-1 relative group overflow-hidden cursor-pointer bg-surface border border-border flex items-center">
+<img alt="Coach giving tactical instructions to players on sidelines, documentary style, black and white" class="w-1/2 h-full object-cover grayscale opacity-80 group-hover:opacity-100 transition-opacity duration-500" data-alt="Coach giving tactical instructions to players on sidelines, documentary style, black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8xZ3vWWjeDsWHWd_UI5OXFva3-ZeKi8KZUe0Ar0ghW7Rp2ovwMugc-uH8JdOBD6Cxu7eopWYT6azC3FvAMJVaenEd3AkYX-N877Lkx-6MS7hG36vVFVz2urNJCxh1INOE7Hc3wttQtASThgJFAIRzcT9wMjIAaPgTFAjLvIUYd_aGPU95EKXKbQEDgRCVqjbZfVwVA-DLVMe5NB9VnHgfuqa9LkTL33fDwUr56NTFDDJrUpghoDj6a8z9s0arIYW9hrw-OX1vz4K8"/>
+<div class="w-1/2 p-lg">
+<span class="text-secondary-container font-label-caps text-label-caps text-[10px] mb-2 block uppercase border border-secondary-container w-fit px-1">教练专访</span>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-2 line-clamp-2">"防守是我们取胜的基石"</h4>
+<p class="font-body-secondary text-body-secondary text-neutral-text line-clamp-2 hidden lg:block">主教练王指导在赛后发布会上深入解析了球队近期的防守体系战术调整...</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 border-t-4 border-black bg-black text-white flex flex-col items-center justify-center space-y-6 px-4 text-center mt-section">
+<div class="text-white font-black italic text-2xl">
+            观湖实验学校足球队
+        </div>
+<div class="flex gap-6 font-lexend text-xs tracking-widest uppercase">
+<a class="opacity-70 hover:opacity-100 hover:text-gray-300 transition-all" href="#">隐私政策</a>
+<a class="opacity-70 hover:opacity-100 hover:text-gray-300 transition-all" href="#">联系我们</a>
+<a class="opacity-70 hover:opacity-100 hover:text-gray-300 transition-all" href="#">加入我们</a>
+</div>
+<p class="font-lexend text-xs tracking-widest uppercase text-gray-500 mt-8">
+            © 2024 深圳市龙华区观湖实验学校足球队. ALL RIGHTS RESERVED.
+        </p>
+</footer>
+</body></html>

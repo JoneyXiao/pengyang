@@ -16,9 +16,9 @@ export const STATUS_LABELS: Record<MatchStatus, string> = {
 }
 
 export const STATUS_COLORS: Record<MatchStatus, string> = {
-  upcoming: "bg-[#111111] text-white",
-  live: "bg-[#FA5400] text-white",
-  completed: "bg-[#F5F5F5] text-[#707072]",
+  upcoming: "bg-primary text-primary-foreground",
+  live: "bg-secondary text-secondary-foreground",
+  completed: "border border-border bg-muted text-muted-foreground",
 }
 
 export const MAX_PHOTO_SIZE_BYTES = 10 * 1024 * 1024

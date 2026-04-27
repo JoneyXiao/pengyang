@@ -1,8 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useRef, useState } from "react"
-import { MatchMediaService, PublicService } from "@/client"
+import { MatchesService, MatchMediaService } from "@/client"
 import useCustomToast from "@/hooks/useCustomToast"
 import { isValidUrl, MAX_PHOTO_SIZE_BYTES } from "./shared"
+import { MdOutlinePermMedia } from "react-icons/md"
+import { ImUpload } from "react-icons/im"
+import { IoVideocam } from "react-icons/io5"
 
 export function MediaUploadCard({ matchId }: { matchId: string }) {
   const queryClient = useQueryClient()
@@ -14,7 +17,7 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
 
   const { data, isLoading } = useQuery({
     queryKey: ["match-detail", matchId],
-    queryFn: () => PublicService.getMatchDetail({ matchId }),
+    queryFn: () => MatchesService.getMatchDetail({ matchId }),
   })
 
   const uploadPhotoMutation = useMutation({
@@ -82,16 +85,9 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
   const mediaItems = data?.media ?? []
 
   return (
-    <div className="rounded-lg border-2 border-[#E5E5E5] p-5 md:p-6">
+    <div className="rounded-lg border-1 border-border p-5 md:p-6">
       <div className="mb-5 flex items-center gap-2">
-        <svg
-          className="h-5 w-5 text-[#111111]"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z" />
-        </svg>
+        <MdOutlinePermMedia className="size-5 text-foreground" />
         <h2
           className="font-display text-lg tracking-wide"
           style={{ fontWeight: 900 }}
@@ -111,27 +107,20 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
           onDragLeave={() => setIsDragOver(false)}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className={`flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2 ${
+          className={`flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
             isDragOver
-              ? "border-[#FA5400] bg-[#FA5400]/5"
-              : "border-[#E5E5E5] hover:border-[#111111]"
+              ? "border-secondary bg-secondary/10"
+              : "border-border hover:border-ring hover:bg-muted/50"
           }`}
         >
-          <svg
-            className="mb-2 h-10 w-10 text-[#B0B0B0]"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z" />
-          </svg>
+          <ImUpload className="mb-2 size-10 text-muted-foreground" />
           <p
             className="font-display text-sm tracking-wide"
             style={{ fontWeight: 700 }}
           >
             拖拽文件至此
           </p>
-          <p className="mt-1 text-xs text-[#B0B0B0]">
+          <p className="mt-1 text-xs text-muted-foreground">
             照片（最大 10MB，支持 JPEG / PNG / WebP）
           </p>
           <input
@@ -154,30 +143,30 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
               value={videoTitle}
               onChange={(e) => setVideoTitle(e.target.value)}
               placeholder="视频标题"
-              className="w-28 rounded-lg border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm transition-colors focus:border-[#111111] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1"
+              className="w-28 rounded-lg border-1 border-input bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus:border-ring focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background"
             />
             <input
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
               placeholder="视频链接 (如Bilibili)"
-              className={`flex-1 rounded-lg border-2 bg-white px-3 py-2 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-1 ${
+              className={`flex-1 rounded-lg border-1 bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background ${
                 videoUrl.trim() && !videoUrlValid
-                  ? "border-red-300 focus:border-red-500"
-                  : "border-[#E5E5E5] focus:border-[#111111]"
+                  ? "border-destructive/50 focus:border-destructive"
+                  : "border-input focus:border-ring"
               }`}
             />
             <button
               type="button"
               disabled={!videoUrlValid}
               onClick={() => addVideoMutation.mutate()}
-              className="shrink-0 rounded-[30px] bg-[#111111] px-4 py-2 font-display text-xs tracking-wide text-white transition-colors hover:bg-[#292929] disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
+              className="shrink-0 rounded-[30px] bg-primary px-4 py-2 font-display text-xs tracking-wide text-primary-foreground transition-colors hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               style={{ fontWeight: 700 }}
             >
               添加
             </button>
           </div>
           {videoUrl.trim() && !videoUrlValid && (
-            <p className="text-xs text-red-500">请输入有效的链接地址</p>
+            <p className="text-xs text-destructive">请输入有效的链接地址</p>
           )}
 
           {/* Media preview grid */}
@@ -186,7 +175,7 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="aspect-square animate-pulse rounded bg-[#F5F5F5]"
+                  className="aspect-square animate-pulse rounded bg-muted"
                 />
               ))}
             </div>
@@ -195,7 +184,7 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
               {mediaItems.map((item) => (
                 <div
                   key={item.id}
-                  className="group relative aspect-square overflow-hidden rounded bg-[#F5F5F5]"
+                  className="group relative aspect-square overflow-hidden rounded bg-muted"
                 >
                   {item.media_type === "photo" && item.file_path ? (
                     <img
@@ -205,15 +194,8 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
                     />
                   ) : (
                     <div className="flex h-full flex-col items-center justify-center p-2">
-                      <svg
-                        className="mb-1 h-6 w-6 text-[#707072]"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                      <span className="truncate text-[10px] text-[#707072]">
+                      <IoVideocam className="mb-1 size-6 text-muted-foreground" />
+                      <span className="truncate text-[10px] text-muted-foreground">
                         {item.title || "视频"}
                       </span>
                     </div>
@@ -224,20 +206,20 @@ export function MediaUploadCard({ matchId }: { matchId: string }) {
                   <button
                     type="button"
                     onClick={() => deleteMutation.mutate(item.id)}
-                    className="absolute right-0.5 top-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-red-500 text-xs text-white opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-1"
+                    className="absolute right-0.5 top-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-destructive text-xs text-white opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 outline-none focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-1 focus-visible:ring-offset-background"
                     aria-label="删除"
                   >
                     ×
                   </button>
                 </div>
               ))}
-              <div className="flex aspect-square items-center justify-center rounded border-2 border-dashed border-[#E5E5E5]">
-                <span className="text-xs text-[#B0B0B0]">空位</span>
+              <div className="flex aspect-square items-center justify-center rounded border-2 border-dashed border-border">
+                <span className="text-xs text-muted-foreground">空位</span>
               </div>
             </div>
           ) : (
-            <div className="flex aspect-video items-center justify-center rounded border-2 border-dashed border-[#E5E5E5]">
-              <span className="text-xs text-[#B0B0B0]">暂无媒体</span>
+            <div className="flex aspect-video items-center justify-center rounded border-2 border-dashed border-border">
+              <span className="text-xs text-muted-foreground">暂无媒体</span>
             </div>
           )}
         </div>

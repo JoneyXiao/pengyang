@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>阵容 - 观湖实验学校足球队</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "disabled-text": "#8D8D8F",
+                      "primary-hover": "#292929",
+                      "neutral-text": "#707072",
+                      "on-background": "#1c1b1b",
+                      "surface-tint": "#5f5e5e",
+                      "border": "#E5E5E5",
+                      "secondary": "#aa3700",
+                      "error": "#D43F21",
+                      "surface-container": "#f1edec",
+                      "on-tertiary-container": "#868381",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#313030",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "surface": "#F5F5F5",
+                      "on-surface-variant": "#444748",
+                      "surface-container-high": "#ebe7e6",
+                      "inverse-on-surface": "#f4f0ef",
+                      "on-primary-container": "#858383",
+                      "disabled-bg": "#CACACB",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#000000",
+                      "surface-container-low": "#f7f3f2",
+                      "warning": "#FFC107",
+                      "on-secondary-fixed-variant": "#822800",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#380c00",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "surface-dim": "#ddd9d8",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#e5e2e1",
+                      "outline-variant": "#c4c7c7",
+                      "inverse-primary": "#c8c6c5",
+                      "primary-fixed": "#e5e2e1",
+                      "secondary-fixed-dim": "#ffb59c",
+                      "primary-container": "#1c1b1b",
+                      "on-secondary": "#ffffff",
+                      "primary": "#000000",
+                      "tertiary-fixed": "#e6e1df",
+                      "on-primary-fixed-variant": "#474646",
+                      "secondary-fixed": "#ffdbcf",
+                      "tertiary-container": "#1d1b1a",
+                      "background": "#FFFFFF",
+                      "surface-bright": "#fdf8f8",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#1c1b1b",
+                      "secondary-container": "#ff5706",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "outline": "#747878",
+                      "on-secondary-container": "#511500",
+                      "success": "#128A09"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "lg": "24px",
+                      "margin-max": "120px",
+                      "md": "16px",
+                      "section": "48px",
+                      "base": "4px",
+                      "xs": "8px",
+                      "hero": "96px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Jost"],
+                      "headline-sm": ["Jost"],
+                      "nav-link": ["Inter"],
+                      "product-title": ["Jost"],
+                      "display-hero": ["Jost"],
+                      "label-caps": ["Inter"],
+                      "body-secondary": ["Inter"],
+                      "body-main": ["Inter"],
+                      "headline-lg": ["Jost"]
+              },
+              "fontSize": {
+                      "headline-md": ["36px", { "lineHeight": "1.1", "fontWeight": "700" }],
+                      "headline-sm": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                      "nav-link": ["16px", { "lineHeight": "1.5", "fontWeight": "500" }],
+                      "product-title": ["16px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                      "display-hero": ["120px", { "lineHeight": "0.95", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                      "label-caps": ["12px", { "lineHeight": "1.0", "fontWeight": "600" }],
+                      "body-secondary": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                      "body-main": ["15px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                      "headline-lg": ["48px", { "lineHeight": "0.95", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Swoosh Bold Card Hover */
+        .card-swoosh {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-swoosh:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-main selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 h-[64px] border-b bg-white/95 backdrop-blur-md border-b-2 border-black flex justify-between items-center px-6 max-w-[1440px] mx-auto w-full">
+<div class="text-2xl font-black italic tracking-tighter text-black uppercase">
+            观湖实验学校足球队
+        </div>
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="font-nav-link text-nav-link text-gray-500 hover:text-black transition-colors uppercase h-full flex items-center" href="#">首页</a>
+<a class="font-nav-link text-nav-link text-gray-500 hover:text-black transition-colors uppercase h-full flex items-center" href="#">球队介绍</a>
+<a class="font-nav-link text-nav-link text-black border-b-4 border-black pb-1 font-bold uppercase h-full flex items-center" href="#">阵容</a>
+<a class="font-nav-link text-nav-link text-gray-500 hover:text-black transition-colors uppercase h-full flex items-center" href="#">赛事管理</a>
+</nav>
+<div class="flex items-center">
+<button class="hover:bg-gray-100 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined text-black" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-[64px] pb-section max-w-[1440px] mx-auto px-4 md:px-lg">
+<!-- Page Header -->
+<section class="py-section">
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase mb-sm">阵容</h1>
+<p class="font-body-secondary text-body-secondary text-neutral-text max-w-2xl">
+                The pride of 观湖实验学校. Meet the athletes and coaching staff driving our success on the pitch.
+            </p>
+</section>
+<!-- Coaching Staff Section -->
+<section class="mb-hero">
+<div class="border-b-4 border-primary mb-lg pb-base">
+<h2 class="font-headline-md text-headline-md text-primary uppercase">Coaching Staff</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-base md:gap-md">
+<!-- Coach Card -->
+<div class="card-swoosh flex flex-col group cursor-pointer">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Head Coach portrait, serious expression, athletic apparel, sunny outdoor pitch background" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="Head Coach portrait, serious expression, athletic apparel, sunny outdoor pitch background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG1nQXKAXDpEfigWG6mFdUBYjjrGaRrRYr4B2e7n4nv30jYFz0HtJgoA0mpEtq0p5M7N4eWzWonHdwfJNyM43DoMUByDY3ok48sD_ACHlkllOWg6RV3qeJGdGY-q_UKOe_T4aVc_gBTp0v5GA5ZktqM64i-cx7T1t073_deSUOtEWMMkg_VLn8IyQQ56U6qU31_emIJ8jJZ_kbn90P_D7UtqbXKbropI5GPf0ISlAtPBm2RnjkbjaG3MswBQQUFII4p56do-Opfb9i"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Head Coach</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">李建国</h3>
+</div>
+</div>
+<!-- Assistant Coach Card -->
+<div class="card-swoosh flex flex-col group cursor-pointer">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Assistant Coach portrait, smiling, holding a clipboard, natural lighting, sports field" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="Assistant Coach portrait, smiling, holding a clipboard, natural lighting, sports field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP7BTvFjmIG8x7itm80sOsXzOfBvHo_t8kzcYQglR3XVAsJIO_ks1A5BPGof8cuhYvxjoW3jEqzwp6xBWC2m7EnbvW11lmoy-fO1V61LbppyNM2ECjX3HAs0c_EmbNwjaWbui_reaUcSjxz5TkQmI9KcBASMpDbbFoKKtYMNh5FdCsORaUfwISaJA2rxCkmTFzNyddn55Yy8xHwMFr8xgVW-UPm4d3A8rXX9t1ZKiXE0OkSNLAE1-z1JpTULQESvMan-sXXw9MmEqL"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Assistant Coach</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">王伟</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Players Section -->
+<section>
+<div class="border-b-4 border-primary mb-lg pb-base flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-primary uppercase">Players</h2>
+<div class="hidden md:flex gap-sm">
+<span class="font-label-caps text-label-caps text-primary cursor-pointer border-b-2 border-primary">All</span>
+<span class="font-label-caps text-label-caps text-neutral-text cursor-pointer hover:text-primary transition-colors">Forwards</span>
+<span class="font-label-caps text-label-caps text-neutral-text cursor-pointer hover:text-primary transition-colors">Midfielders</span>
+<span class="font-label-caps text-label-caps text-neutral-text cursor-pointer hover:text-primary transition-colors">Defenders</span>
+<span class="font-label-caps text-label-caps text-neutral-text cursor-pointer hover:text-primary transition-colors">Goalkeepers</span>
+</div>
+</div>
+<!-- Player Grid (Ultra tight spacing on desktop as per style guide) -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-md md:gap-[4px]">
+<!-- Player Card 1 -->
+<div class="card-swoosh flex flex-col group cursor-pointer relative bg-white pb-sm">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Young male soccer player in action, striking a ball, intense focus, stadium lights" class="w-full h-full object-cover filter contrast-125 group-hover:scale-105 transition-transform duration-500" data-alt="Young male soccer player in action, striking a ball, intense focus, stadium lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmneWdy1Q5k6jD0pZxSQqgybj8OEAxGI_LmJ2p1T78ZkI4pZSGNw-IZy5ogYCOolK-WmhdPOOioD6dKzVwJuD9bPT7ZL2qQEUgA-ysnw3hdXW-kgsBsU8Wn8eMOkoPIEdU9n5F4xWCJsGUL7g-o1CzHGgfD4QFelbpWrNKrNcb8TI8Jh9Be6dVpSU-AsBL4jNmqKoEb0SjYihQrIcaIJR_00EKnM6rYfTnhu5pCXevNsnheSuxVPQwe-wju-CYWBwPkyj5s9H9SsVM"/>
+<div class="absolute top-sm left-sm bg-primary text-white font-headline-sm text-headline-sm px-2 py-1 leading-none">
+                            10
+                        </div>
+</div>
+<div class="flex flex-col px-base">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Forward</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">张浩然</h3>
+</div>
+</div>
+<!-- Player Card 2 -->
+<div class="card-swoosh flex flex-col group cursor-pointer relative bg-white pb-sm">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Athletic young man running on field, dramatic shadows, high contrast sports photography" class="w-full h-full object-cover filter contrast-125 group-hover:scale-105 transition-transform duration-500" data-alt="Athletic young man running on field, dramatic shadows, high contrast sports photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM5VcbbZQtpQHEXRyoPwFUjfGP1GfjED_i8DIjgkWxA_Q6XMco95n1Qytn5am-KdMH8zyVvwHOzOviBAinUIC0m-P-lcw4D1ILpKpj74tL_pgP0McoAjv3A-bWxLrPe9J0xUoPRByTELpWxUrpUtHV9vcQbsCmUFVPBBpFMTgg33VzCUUHyeuVuZrI3rtdWlhLN9Au0GGt6lnX0WS7CxSoB68CXt0FkJKIGwlpqQpB-jdbKo9fHhcZlZCo_Uw2dw078iHKcmyKuMD-"/>
+<div class="absolute top-sm left-sm bg-primary text-white font-headline-sm text-headline-sm px-2 py-1 leading-none">
+                            8
+                        </div>
+</div>
+<div class="flex flex-col px-base">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Midfielder</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">刘宇轩</h3>
+</div>
+</div>
+<!-- Player Card 3 -->
+<div class="card-swoosh flex flex-col group cursor-pointer relative bg-white pb-sm">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Soccer player portrait looking fiercely into camera, sweat, intense game face, blurred stadium" class="w-full h-full object-cover filter contrast-125 group-hover:scale-105 transition-transform duration-500" data-alt="Soccer player portrait looking fiercely into camera, sweat, intense game face, blurred stadium" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD32YB1j_BVaXjaafN_ZoOLvhWjHMLCk0pkcy8hCdCoo2Gc0G6g_Jpgpey7y1vboKsQetgRw-lO8sij188E4WUQssBzaB9I46D5NFXEzNDJ-9BSiU47Lgo7vuKsrq6JsWqO9ZKGPM1lqMrklxowfL6wKILUQPrOnyNkYjevPIW2rUE5uNIWkrPNtiv8iVRBuGusg6KjYIzv2xDMw_ztK1hdzaTr9_1WOof0brTf--4UJ5vrN0f_Ug16mWQnpaPvOR2kbCKuSYDfEY7J"/>
+<div class="absolute top-sm left-sm bg-primary text-white font-headline-sm text-headline-sm px-2 py-1 leading-none">
+                            4
+                        </div>
+</div>
+<div class="flex flex-col px-base">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Defender</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">陈俊杰</h3>
+</div>
+</div>
+<!-- Player Card 4 -->
+<div class="card-swoosh flex flex-col group cursor-pointer relative bg-white pb-sm">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Goalkeeper making a diving save, dynamic action shot, green grass, high shutter speed" class="w-full h-full object-cover filter contrast-125 group-hover:scale-105 transition-transform duration-500" data-alt="Goalkeeper making a diving save, dynamic action shot, green grass, high shutter speed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6qQQscaGFPBye-6-OhYlT12axoWhQ8tDPemitT_6lUThnnVqYMLlsGPYnY4BtK0Kh8y11Y0zQZtwnhNpHVXoJkgOD17NSRptJ6bYiG-DbQKAYafxPPosi_6jK2nD2FqxKVuikhAFJZ_Y2uiQFodPvNqNEaRHBaVmS_QUYSG-UtdZ07O1brLDrMomp3eoG6-nRD_WOPExMm-lTNhhq4KDfPG0phF58wTCtp7efkOW5nWysM_Xx2WuI24UEhEm5Sx0wPnhv-JUH2Iyk"/>
+<div class="absolute top-sm left-sm bg-primary text-white font-headline-sm text-headline-sm px-2 py-1 leading-none">
+                            1
+                        </div>
+</div>
+<div class="flex flex-col px-base">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Goalkeeper</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">林子豪</h3>
+</div>
+</div>
+<!-- Player Card 5 -->
+<div class="card-swoosh flex flex-col group cursor-pointer relative bg-white pb-sm">
+<div class="relative w-full aspect-square bg-surface mb-sm overflow-hidden">
+<img alt="Young athlete jogging on pitch during warm up, determined look, shallow depth of field" class="w-full h-full object-cover filter contrast-125 group-hover:scale-105 transition-transform duration-500" data-alt="Young athlete jogging on pitch during warm up, determined look, shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOKU3i5RcnDieEfV6L-ODKCyp9W8ywzzxpkdXaS7Xi5A2j9gGxQyPcbna7JP9aJZaxw0bFLzuAIHY9ayt2JXw2OH6_j0okb29leaFg_QvZecZURYcvH9jaZy3ifTs8afNUgAkBT7uKJOaZ8ittxKQ48esLoxszk5FxUGBqgf5qSXpmLQMkFbNN6JVkZRYNbToPkU9ih28-8CCKRyfPS-dYbbdUmAiS8z1Lh_AHGDwn9MRgNpddBjm9bOl8tc_jf_8PgzwJssheYOso"/>
+<div class="absolute top-sm left-sm bg-primary text-white font-headline-sm text-headline-sm px-2 py-1 leading-none">
+                            11
+                        </div>
+</div>
+<div class="flex flex-col px-base">
+<span class="font-label-caps text-label-caps text-neutral-text uppercase mb-base tracking-widest">Forward</span>
+<h3 class="font-product-title text-product-title text-primary uppercase">吴星宇</h3>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t-4 border-black bg-black flex flex-col items-center justify-center space-y-6 px-4 text-center">
+<div class="text-white font-black italic text-xl">
+            观湖实验学校足球队
+        </div>
+<div class="flex gap-6">
+<a class="font-lexend text-xs tracking-widest uppercase text-white opacity-70 hover:opacity-100 hover:text-gray-300 transition-opacity" href="#">隐私政策</a>
+<a class="font-lexend text-xs tracking-widest uppercase text-white opacity-70 hover:opacity-100 hover:text-gray-300 transition-opacity" href="#">联系我们</a>
+<a class="font-lexend text-xs tracking-widest uppercase text-white opacity-70 hover:opacity-100 hover:text-gray-300 transition-opacity" href="#">加入我们</a>
+</div>
+<p class="font-lexend text-xs tracking-widest uppercase text-white opacity-50">
+            © 2024 深圳市龙华区观湖实验学校足球队. ALL RIGHTS RESERVED.
+        </p>
+</footer>
+</body></html>

@@ -3,13 +3,16 @@ from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from app.api.deps import SessionDep, get_current_active_superuser
 from app import crud
+from app.api.deps import SessionDep, get_current_active_superuser
 from app.models import (
     MatchCreate,
-    MatchPublic,
-    MatchPatch,
+    MatchDetailPublic,
     MatchesPublic,
+    MatchMediaPublic,
+    MatchPatch,
+    MatchPublic,
+    MatchUpdatePublic,
     Message,
     User,
 )
@@ -44,6 +47,23 @@ def list_matches(
     return MatchesPublic(
         data=[MatchPublic.model_validate(m) for m in matches],
         count=count,
+    )
+
+
+@router.get("/{match_id}", response_model=MatchDetailPublic)
+def get_match_detail(
+    session: SessionDep, match_id: uuid.UUID, _current_user: SuperUser
+) -> Any:
+    """Match detail with updates and media (admin)."""
+    match = crud.get_match(session=session, match_id=match_id)
+    if not match:
+        raise HTTPException(status_code=404, detail="Match not found")
+    updates = crud.get_match_updates(session=session, match_id=match_id)
+    medias = crud.get_match_medias(session=session, match_id=match_id)
+    return MatchDetailPublic(
+        **MatchPublic.model_validate(match).model_dump(),
+        updates=[MatchUpdatePublic.model_validate(u) for u in updates],
+        media=[MatchMediaPublic.model_validate(m) for m in medias],
     )
 
 
