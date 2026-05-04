@@ -1,7 +1,7 @@
 import { Minus, Plus } from "lucide-react"
+import { TbBroadcast } from "react-icons/tb"
 import type { MatchPublic } from "@/client"
 import { PulsingDot } from "@/components/Public/PulsingDot"
-import { TbBroadcast } from "react-icons/tb"
 
 export function LiveScoreWidget({
   match,

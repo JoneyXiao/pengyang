@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_public")({
 
 function PublicLayout() {
   return (
-    <div className="flex min-h-dvh flex-col bg-white">
+    <div className="flex min-h-dvh flex-col bg-background text-foreground">
       <Navbar />
       <main className="flex-1">
         <Outlet />

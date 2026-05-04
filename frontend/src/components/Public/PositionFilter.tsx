@@ -19,8 +19,8 @@ export function PositionFilter({
             onClick={() => onChange(pos)}
             className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2 font-body text-sm transition-colors ${
               selected === pos
-                ? "bg-[#111111] font-semibold text-white"
-                : "bg-transparent font-medium text-[#707072] hover:bg-[#F5F5F5] hover:text-[#111111]"
+                ? "bg-primary font-semibold text-primary-foreground"
+                : "bg-transparent font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             {pos}

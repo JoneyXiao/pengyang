@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router"
+import { getMatchStatusConfig } from "@/lib/matchStatus"
 import { PulsingDot } from "./PulsingDot"
 
 interface MatchCardProps {
@@ -11,12 +12,6 @@ interface MatchCardProps {
   awayScore?: number | null
 }
 
-const statusConfig: Record<string, { text: string; cls: string }> = {
-  upcoming: { text: "即将开始", cls: "bg-[#111111] text-white" },
-  live: { text: "进行中", cls: "bg-[#FA5400] text-white" },
-  completed: { text: "已结束", cls: "bg-[#F5F5F5] text-[#707072]" },
-}
-
 export function MatchCard({
   id,
   matchDate,
@@ -26,7 +21,7 @@ export function MatchCard({
   homeScore,
   awayScore,
 }: MatchCardProps) {
-  const badge = statusConfig[status] ?? statusConfig.upcoming
+  const badge = getMatchStatusConfig(status)
   const date = new Date(matchDate)
   const dateStr = date.toLocaleDateString("zh-CN", {
     month: "long",
@@ -44,11 +39,11 @@ export function MatchCard({
     <Link
       to="/matches/$matchId"
       params={{ matchId: id }}
-      className="group block rounded-lg border border-[#E5E5E5] p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] md:p-6"
+      className="group block rounded-lg border border-border bg-card p-5 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] md:p-6"
     >
       {/* Top row: date + badge */}
       <div className="mb-4 flex items-center justify-between">
-        <span className="font-body text-xs text-[#707072]">
+        <span className="font-body text-xs text-muted-foreground">
           {dateStr} · {timeStr}
         </span>
         <span
@@ -64,7 +59,7 @@ export function MatchCard({
         {/* Home */}
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <span
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#111111] font-display text-sm text-white"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary font-display text-sm text-primary-foreground"
             style={{ fontWeight: 900 }}
           >
             {homeTeam.charAt(0)}
@@ -85,12 +80,12 @@ export function MatchCard({
               style={{ fontWeight: 900 }}
             >
               {homeScore ?? 0}
-              <span className="mx-1 text-[#E5E5E5]">-</span>
+              <span className="mx-1 text-border">-</span>
               {awayScore ?? 0}
             </span>
           ) : (
             <span
-              className="font-display text-lg text-[#707072]"
+              className="font-display text-lg text-muted-foreground"
               style={{ fontWeight: 700 }}
             >
               VS
@@ -101,7 +96,7 @@ export function MatchCard({
         {/* Away */}
         <div className="flex min-w-0 flex-1 flex-row-reverse items-center gap-3">
           <span
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#E5E5E5] bg-white font-display text-sm text-[#111111]"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-1 border-border bg-background font-display text-sm text-foreground"
             style={{ fontWeight: 900 }}
           >
             {awayTeam.charAt(0)}

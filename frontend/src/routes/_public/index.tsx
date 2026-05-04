@@ -36,7 +36,7 @@ function LandingPage() {
       <div>
         <HeroSection />
         <div className="py-20 text-center">
-          <p className="font-body text-lg text-[#707072]">
+          <p className="font-body text-lg text-muted-foreground">
             加载失败，请刷新页面重试
           </p>
         </div>
@@ -51,7 +51,7 @@ function LandingPage() {
       {/* Next Match Bento */}
       {(isLoading || nextMatch) && (
         <section className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
-          <div className="mb-6 flex items-baseline justify-between">
+          <div className="mb-6 flex items-baseline justify-between border-b-2 border-primary pb-3">
             <div className="flex items-baseline gap-3">
               <h2
                 className="font-display text-xl tracking-tight md:text-2xl"
@@ -59,12 +59,12 @@ function LandingPage() {
               >
                 下一场比赛
               </h2>
-              <span className="hidden font-display text-sm tracking-wide text-[#707072] md:inline">
+              <span className="hidden font-display text-sm tracking-wide text-muted-foreground md:inline">
                 NEXT MATCH
               </span>
             </div>
             {nextMatch && (
-              <span className="font-body text-xs text-[#707072] md:text-sm">
+              <span className="font-body text-xs text-muted-foreground md:text-sm">
                 {new Date(nextMatch.match_date).toLocaleDateString("zh-CN", {
                   month: "long",
                   day: "numeric",
@@ -81,8 +81,8 @@ function LandingPage() {
 
           {isLoading ? (
             <div className="grid gap-4 xl:grid-cols-5">
-              <div className="h-48 animate-pulse rounded-lg bg-[#F5F5F5] xl:col-span-3" />
-              <div className="h-48 animate-pulse rounded-lg bg-[#F5F5F5] xl:col-span-2" />
+              <div className="h-48 animate-pulse rounded-lg bg-muted xl:col-span-3" />
+              <div className="h-48 animate-pulse rounded-lg bg-muted xl:col-span-2" />
             </div>
           ) : nextMatch ? (
             <div className="grid gap-4 xl:grid-cols-5">
@@ -90,15 +90,15 @@ function LandingPage() {
               <Link
                 to="/matches/$matchId"
                 params={{ matchId: nextMatch.id }}
-                className="group flex flex-col items-center justify-center rounded-lg border border-[#E5E5E5] p-6 transition-transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] md:p-8 xl:col-span-3"
+                className="group flex flex-col items-center justify-center rounded-lg border border-border bg-card p-6 transition-transform hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] md:p-8 xl:col-span-3"
               >
-                <span className="mb-4 font-body text-xs uppercase tracking-[0.15em] text-[#707072]">
+                <span className="mb-4 font-body text-xs uppercase tracking-[0.15em] text-muted-foreground">
                   {nextMatch.home_team === data?.team_name ? "主场" : "客场"}
                 </span>
                 <div className="flex w-full items-center justify-center gap-6 md:gap-10">
                   <div className="flex flex-col items-center gap-2">
                     <span
-                      className="flex h-14 w-14 items-center justify-center rounded-full bg-[#111111] font-display text-lg text-white md:h-16 md:w-16 md:text-xl"
+                      className="flex h-14 w-14 items-center justify-center rounded-full bg-primary font-display text-lg text-primary-foreground md:h-16 md:w-16 md:text-xl"
                       style={{ fontWeight: 900 }}
                     >
                       {nextMatch.home_team.charAt(0)}
@@ -111,14 +111,14 @@ function LandingPage() {
                     </span>
                   </div>
                   <span
-                    className="font-display text-2xl text-[#707072] md:text-3xl"
+                    className="font-display text-2xl text-muted-foreground md:text-3xl"
                     style={{ fontWeight: 900 }}
                   >
                     VS
                   </span>
                   <div className="flex flex-col items-center gap-2">
                     <span
-                      className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#E5E5E5] bg-white font-display text-lg text-[#111111] md:h-16 md:w-16 md:text-xl"
+                      className="flex h-14 w-14 items-center justify-center rounded-full border-1 border-border bg-background font-display text-lg text-foreground md:h-16 md:w-16 md:text-xl"
                       style={{ fontWeight: 900 }}
                     >
                       {nextMatch.away_team.charAt(0)}
@@ -132,17 +132,17 @@ function LandingPage() {
                   </div>
                 </div>
                 {nextMatch.precautions && (
-                  <p className="mt-4 font-body text-xs text-[#707072]">
+                  <p className="mt-4 font-body text-xs text-muted-foreground">
                     {nextMatch.precautions}
                   </p>
                 )}
               </Link>
 
               {/* Countdown card */}
-              <div className="flex flex-col items-center justify-center rounded-lg bg-[#111111] p-6 text-white md:p-8 xl:col-span-2">
+              <div className="flex flex-col items-center justify-center rounded-lg border border-border bg-card p-6 text-card-foreground md:p-8 xl:col-span-2">
                 <div className="mb-4 flex items-center gap-2">
-                  <Clock size={14} className="text-[#FA5400]" />
-                  <span className="font-body text-xs uppercase tracking-[0.15em] text-white/50">
+                  <Clock size={14} className="text-secondary" />
+                  <span className="font-body text-xs uppercase tracking-[0.15em] text-muted-foreground">
                     距离开赛还有
                   </span>
                 </div>
@@ -155,16 +155,21 @@ function LandingPage() {
 
       {/* Highlights Bento */}
       <section className="mx-auto max-w-7xl px-4 pb-16 md:px-8 md:pb-24">
-        <div className="mb-6 flex items-center justify-between border-b-2 border-[#111111] pb-3 mt-16">
-          <h2
-            className="font-display text-xl tracking-tight md:text-2xl"
-            style={{ fontWeight: 900 }}
-          >
-            赛场高光
-          </h2>
+        <div className="mb-6 mt-16 flex items-center justify-between border-b-2 border-primary pb-3">
+          <div className="flex items-baseline gap-3">
+            <h2
+              className="font-display text-xl tracking-tight md:text-2xl"
+              style={{ fontWeight: 900 }}
+            >
+              赛场高光
+            </h2>
+            <span className="hidden font-display text-sm tracking-wide text-muted-foreground md:inline">
+              MATCH HIGHLIGHTS
+            </span>
+          </div>
           <Link
             to="/matches"
-            className="font-body text-sm text-[#707072] transition-colors hover:text-[#111111]"
+            className="font-body text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             全部战报 →
           </Link>
@@ -173,33 +178,35 @@ function LandingPage() {
         {isLoading ? (
           <div className="grid gap-[4px] md:grid-cols-2 md:grid-rows-2 md:h-[600px]">
             {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="h-48 animate-pulse bg-[#F5F5F5] md:h-auto"
-              />
+              <div key={i} className="h-48 animate-pulse bg-muted md:h-auto" />
             ))}
           </div>
         ) : data?.recent_matches && data.recent_matches.length > 0 ? (
           <HighlightsBento matches={data.recent_matches} />
         ) : (
           <div className="py-16 text-center">
-            <p className="font-body text-[#707072]">暂无比赛记录</p>
+            <p className="font-body text-muted-foreground">暂无比赛记录</p>
           </div>
         )}
 
         {/* Upcoming matches */}
         {data?.upcoming_matches && data.upcoming_matches.length > 1 && (
           <div className="mt-12">
-            <div className="mb-6 flex items-center justify-between">
-              <h2
-                className="font-display text-xl tracking-tight md:text-2xl"
-                style={{ fontWeight: 900 }}
-              >
-                即将开始
-              </h2>
+            <div className="mb-6 flex items-center justify-between border-b-2 border-primary pb-3">
+              <div className="flex items-baseline gap-3">
+                <h2
+                  className="font-display text-xl tracking-tight md:text-2xl"
+                  style={{ fontWeight: 900 }}
+                >
+                  即将开始
+                </h2>
+                <span className="hidden font-display text-sm tracking-wide text-muted-foreground md:inline">
+                  UPCOMING MATCH
+                </span>
+              </div>
               <Link
                 to="/matches"
-                className="font-body text-sm text-[#707072] transition-colors hover:text-[#111111]"
+                className="font-body text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 查看全部 →
               </Link>
@@ -225,7 +232,13 @@ function LandingPage() {
   )
 }
 
-function PhotoCarousel({ photos }: { photos: MatchMediaPublic[] }) {
+function PhotoCarousel({
+  photos,
+  delay = 4000,
+}: {
+  photos: MatchMediaPublic[]
+  delay?: number
+}) {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
 
@@ -247,10 +260,10 @@ function PhotoCarousel({ photos }: { photos: MatchMediaPublic[] }) {
     <Carousel
       setApi={setApi}
       opts={{ loop: true }}
-      plugins={[Autoplay({ delay: 4000, stopOnInteraction: true })]}
+      plugins={[Autoplay({ delay, stopOnInteraction: true })]}
       className="absolute inset-0 [&>div]:h-full"
     >
-      <CarouselContent className="ml-0 h-full">
+      <CarouselContent className="ml-0 h-full will-change-transform">
         {photos.map((photo, index) => (
           <CarouselItem
             key={photo.id}
@@ -258,16 +271,8 @@ function PhotoCarousel({ photos }: { photos: MatchMediaPublic[] }) {
           >
             <img
               src={photo.file_path ?? undefined}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full scale-125 object-cover object-center opacity-50 blur-2xl"
-              decoding="async"
-              loading="lazy"
-            />
-            <img
-              src={photo.file_path ?? undefined}
               alt={photo.caption || "比赛照片"}
-              className="absolute inset-0 z-10 h-full w-full object-contain object-center"
+              className="absolute inset-0 h-full w-full object-contain object-center"
               decoding="async"
               fetchPriority={index === 0 ? "high" : "auto"}
               loading={index === 0 ? "eager" : "lazy"}
@@ -363,7 +368,7 @@ function HighlightsBento({ matches }: { matches: MatchHighlight[] }) {
         className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden bg-[#111111] p-5 md:row-span-2 md:p-8"
       >
         {m0.photos && m0.photos.length > 0 ? (
-          <PhotoCarousel photos={m0.photos} />
+          <PhotoCarousel photos={m0.photos} delay={4000} />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-[#111111] via-[#111111]/80 to-[#292929]" />
         )}
@@ -394,7 +399,7 @@ function HighlightsBento({ matches }: { matches: MatchHighlight[] }) {
         className="group relative flex min-h-[140px] flex-col justify-end overflow-hidden bg-[#1a1a1a] p-5 md:p-6"
       >
         {m1.photos && m1.photos.length > 0 ? (
-          <PhotoCarousel photos={m1.photos} />
+          <PhotoCarousel photos={m1.photos} delay={4400} />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#222222]" />
         )}
@@ -445,7 +450,7 @@ function HighlightsBento({ matches }: { matches: MatchHighlight[] }) {
             className="group relative flex min-h-[140px] flex-col justify-end overflow-hidden bg-[#111111] p-5 md:p-6"
           >
             {m2.photos && m2.photos.length > 0 ? (
-              <PhotoCarousel photos={m2.photos} />
+              <PhotoCarousel photos={m2.photos} delay={4800} />
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-[#111111] to-[#222222]" />
             )}

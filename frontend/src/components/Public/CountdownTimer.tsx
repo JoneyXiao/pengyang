@@ -30,7 +30,7 @@ function Segment({ value, label }: { value: number; label: string }) {
       >
         {String(value).padStart(2, "0")}
       </span>
-      <span className="mt-1 font-body text-[10px] uppercase tracking-[0.15em] text-white/50 md:text-xs">
+      <span className="mt-1 font-body text-[10px] uppercase tracking-[0.15em] text-muted-foreground md:text-xs">
         {label}
       </span>
     </div>
@@ -40,7 +40,7 @@ function Segment({ value, label }: { value: number; label: string }) {
 function Colon() {
   return (
     <span
-      className="font-display text-3xl text-[#FA5400] sm:text-4xl xl:text-5xl"
+      className="font-display text-3xl text-secondary sm:text-4xl xl:text-5xl"
       style={{ fontWeight: 900, lineHeight: 1 }}
     >
       :
@@ -77,7 +77,7 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   if (isExpired) {
     return (
       <p
-        className="font-display text-2xl tracking-tight text-[#FA5400] md:text-3xl"
+        className="font-display text-2xl tracking-tight text-secondary md:text-3xl"
         style={{ fontWeight: 900 }}
       >
         已开赛

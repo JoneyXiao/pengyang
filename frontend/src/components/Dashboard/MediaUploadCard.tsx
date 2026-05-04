@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useRef, useState } from "react"
+import { ImUpload } from "react-icons/im"
+import { IoVideocam } from "react-icons/io5"
+import { MdOutlinePermMedia } from "react-icons/md"
 import { MatchesService, MatchMediaService } from "@/client"
 import useCustomToast from "@/hooks/useCustomToast"
 import { isValidUrl, MAX_PHOTO_SIZE_BYTES } from "./shared"
-import { MdOutlinePermMedia } from "react-icons/md"
-import { ImUpload } from "react-icons/im"
-import { IoVideocam } from "react-icons/io5"
 
 export function MediaUploadCard({ matchId }: { matchId: string }) {
   const queryClient = useQueryClient()

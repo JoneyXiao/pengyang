@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { Plus } from "lucide-react"
 import { useCallback, useRef, useState } from "react"
+import { IoCalendarOutline } from "react-icons/io5"
 import type { MatchCreate, MatchPatch, MatchStatus } from "@/client"
 import { MatchesService } from "@/client"
 import { EditMatchInline } from "@/components/Dashboard/EditMatchInline"
@@ -27,7 +28,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Checkbox } from "@/components/ui/checkbox"
 import useCustomToast from "@/hooks/useCustomToast"
-import { IoCalendarOutline } from "react-icons/io5"
 
 export const Route = createFileRoute("/_layout/dashboard")({
   component: MatchesManagement,

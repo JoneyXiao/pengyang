@@ -58,27 +58,29 @@ function TeamPage() {
       <section className="mx-auto max-w-4xl px-4 py-12 md:px-8 md:py-20">
         {isError ? (
           <div className="py-16 text-center">
-            <p className="font-body text-[#707072]">加载失败，请刷新页面重试</p>
+            <p className="font-body text-muted-foreground">
+              加载失败，请刷新页面重试
+            </p>
           </div>
         ) : isLoading ? (
           <div className="space-y-4">
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="h-5 animate-pulse rounded bg-[#F5F5F5]"
+                className="h-5 animate-pulse rounded bg-muted"
                 style={{ width: `${90 - i * 15}%` }}
               />
             ))}
           </div>
         ) : data?.content ? (
           <div
-            className="team-prose prose prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-[#111111] prose-p:font-body prose-p:leading-relaxed prose-p:text-[#111111]/80 prose-a:text-[#FA5400] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#111111] prose-img:rounded-lg"
+            className="team-prose prose prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-foreground prose-p:font-body prose-p:leading-relaxed prose-p:text-foreground/80 prose-a:text-secondary prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-img:rounded-lg"
             // biome-ignore lint/security/noDangerouslySetInnerHtml: content is sanitized server-side via nh3
             dangerouslySetInnerHTML={{ __html: data.content }}
           />
         ) : (
           <div className="py-16 text-center">
-            <p className="font-body text-[#707072]">暂无球队介绍内容</p>
+            <p className="font-body text-muted-foreground">暂无球队介绍内容</p>
           </div>
         )}
       </section>

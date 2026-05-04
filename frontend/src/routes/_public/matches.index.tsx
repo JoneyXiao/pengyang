@@ -33,7 +33,9 @@ function MatchesPage() {
       >
         比赛日程
       </h1>
-      <p className="mb-8 font-body text-sm text-[#707072]">MATCH SCHEDULE</p>
+      <p className="mb-8 font-body text-sm text-muted-foreground">
+        MATCH SCHEDULE
+      </p>
 
       {/* Tabs */}
       <div className="mb-8 flex gap-2">
@@ -44,8 +46,8 @@ function MatchesPage() {
             onClick={() => setTab(t.value)}
             className={`rounded-[30px] px-5 py-2.5 font-display text-sm tracking-wide transition-colors ${
               tab === t.value
-                ? "bg-[#111111] text-white"
-                : "bg-[#F5F5F5] text-[#707072] hover:bg-[#E5E5E5]"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
             }`}
             style={{ fontWeight: 700 }}
           >
@@ -56,17 +58,14 @@ function MatchesPage() {
 
       {isError ? (
         <div className="py-20 text-center">
-          <p className="font-body text-lg text-[#707072]">
+          <p className="font-body text-lg text-muted-foreground">
             加载失败，请刷新页面重试
           </p>
         </div>
       ) : isLoading ? (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="h-36 animate-pulse rounded-lg bg-[#F5F5F5]"
-            />
+            <div key={i} className="h-36 animate-pulse rounded-lg bg-muted" />
           ))}
         </div>
       ) : data?.data && data.data.length > 0 ? (
@@ -86,7 +85,7 @@ function MatchesPage() {
         </div>
       ) : (
         <div className="py-20 text-center">
-          <p className="font-body text-lg text-[#707072]">
+          <p className="font-body text-lg text-muted-foreground">
             {tab === "upcoming"
               ? "暂无即将开始的比赛"
               : tab === "live"

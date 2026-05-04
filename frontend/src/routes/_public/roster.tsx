@@ -59,28 +59,27 @@ function RosterPage() {
       >
         阵容
       </h1>
-      <p className="mb-12 font-body text-sm text-[#707072] md:text-base">
+      <p className="mb-12 font-body text-sm text-muted-foreground md:text-base">
         了解我们的教练组和球员阵容
       </p>
 
       {/* Coaching Staff */}
       <section className="mb-16">
         <h2
-          className="mb-8 border-b-4 border-[#111111] pb-2 font-display text-lg tracking-wide md:text-xl"
+          className="mb-8 border-b-4 border-primary pb-2 font-display text-lg tracking-wide md:text-xl"
           style={{ fontWeight: 900 }}
         >
           教练组
         </h2>
 
         {coachesError ? (
-          <p className="font-body text-[#707072]">加载失败，请刷新页面重试</p>
+          <p className="font-body text-muted-foreground">
+            加载失败，请刷新页面重试
+          </p>
         ) : loadingCoaches ? (
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
             {[1, 2].map((i) => (
-              <div
-                key={i}
-                className="aspect-square animate-pulse bg-[#F5F5F5]"
-              />
+              <div key={i} className="aspect-square animate-pulse bg-muted" />
             ))}
           </div>
         ) : coachesData?.data && coachesData.data.length > 0 ? (
@@ -98,13 +97,13 @@ function RosterPage() {
             ))}
           </div>
         ) : (
-          <p className="font-body text-[#707072]">暂无教练信息</p>
+          <p className="font-body text-muted-foreground">暂无教练信息</p>
         )}
       </section>
 
       {/* Players */}
       <section>
-        <div className="mb-6 flex flex-col gap-4 border-b-4 border-[#111111] pb-2 md:flex-row md:items-center md:justify-between">
+        <div className="mb-6 flex flex-col gap-4 border-b-4 border-primary pb-2 md:flex-row md:items-center md:justify-between">
           <h2
             className="font-display text-lg tracking-wide md:text-xl"
             style={{ fontWeight: 900 }}
@@ -122,15 +121,14 @@ function RosterPage() {
 
         {playersError ? (
           <div className="py-16 text-center">
-            <p className="font-body text-[#707072]">加载失败，请刷新页面重试</p>
+            <p className="font-body text-muted-foreground">
+              加载失败，请刷新页面重试
+            </p>
           </div>
         ) : loadingPlayers ? (
           <div className="grid grid-cols-2 gap-[4px] md:grid-cols-3 lg:grid-cols-5">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={i}
-                className="aspect-square animate-pulse bg-[#F5F5F5]"
-              />
+              <div key={i} className="aspect-square animate-pulse bg-muted" />
             ))}
           </div>
         ) : filteredPlayers.length > 0 ? (
@@ -150,7 +148,7 @@ function RosterPage() {
           </div>
         ) : (
           <div className="py-16 text-center">
-            <p className="font-body text-[#707072]">暂无球员信息</p>
+            <p className="font-body text-muted-foreground">暂无球员信息</p>
           </div>
         )}
       </section>

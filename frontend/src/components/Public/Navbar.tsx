@@ -42,7 +42,7 @@ export function Navbar() {
   return (
     <>
       <nav
-        className={`sticky top-0 z-50 border-b-2 border-[#111111] bg-white/95 backdrop-blur-md transition-shadow duration-200 ${
+        className={`sticky top-0 z-50 border-b-2 border-primary bg-background/95 backdrop-blur-md transition-shadow duration-200 ${
           scrolled ? "shadow-[0_2px_4px_rgba(0,0,0,0.05)]" : ""
         }`}
       >
@@ -50,7 +50,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex shrink-0 items-center gap-2">
             <span
-              className="font-display text-lg italic tracking-tight text-[#111111]"
+              className="font-display text-lg italic tracking-tight text-foreground"
               style={{ fontWeight: 900 }}
             >
               深圳市龙华区观湖实验学校 - 鹏飏
@@ -65,13 +65,13 @@ export function Navbar() {
                 to={link.to}
                 className={`relative py-1 font-body text-sm tracking-wide transition-colors ${
                   isActive(link.to)
-                    ? "font-semibold text-[#111111]"
-                    : "font-medium text-[#707072] hover:text-[#111111]"
+                    ? "font-semibold text-foreground"
+                    : "font-medium text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {link.label}
                 {isActive(link.to) && (
-                  <span className="absolute -bottom-[19px] left-0 right-0 h-0.5 bg-[#111111]" />
+                  <span className="absolute -bottom-[19px] left-0 right-0 h-0.5 bg-primary" />
                 )}
               </Link>
             ))}
@@ -84,11 +84,11 @@ export function Navbar() {
                 <DropdownMenuTrigger asChild>
                   <button
                     type="button"
-                    className="flex h-9 items-center gap-1.5 rounded-full border border-[#E5E5E5] px-3 text-[#111111] transition-colors hover:bg-[#F5F5F5]"
+                    className="flex h-9 items-center gap-1.5 rounded-full border border-border px-3 text-foreground transition-colors hover:bg-muted"
                     aria-label="管理菜单"
                   >
                     <User size={18} />
-                    <ChevronDown size={14} className="text-[#707072]" />
+                    <ChevronDown size={14} className="text-muted-foreground" />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-44">
@@ -105,7 +105,7 @@ export function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E5E5E5] text-[#111111] transition-colors hover:bg-[#F5F5F5]"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted"
                 aria-label="登录"
               >
                 <User size={18} />
@@ -116,7 +116,7 @@ export function Navbar() {
           {/* Mobile toggle */}
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center text-[#111111] md:hidden"
+            className="flex h-11 w-11 items-center justify-center text-foreground md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "关闭菜单" : "打开菜单"}
           >
@@ -127,7 +127,7 @@ export function Navbar() {
 
       {/* Mobile full-screen overlay — outside <nav> so backdrop-blur doesn't trap it */}
       <div
-        className={`fixed inset-0 top-[66px] z-[60] bg-white transition-all duration-200 ease-out md:hidden ${
+        className={`fixed inset-0 top-[66px] z-[60] bg-background transition-all duration-200 ease-out md:hidden ${
           mobileOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-2 opacity-0"
@@ -138,10 +138,10 @@ export function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`border-b border-[#E5E5E5] py-4 font-display text-2xl uppercase tracking-tight ${
+              className={`border-b border-border py-4 font-display text-2xl uppercase tracking-tight ${
                 isActive(link.to)
-                  ? "font-bold text-[#111111]"
-                  : "font-bold text-[#707072]"
+                  ? "font-bold text-foreground"
+                  : "font-bold text-muted-foreground"
               }`}
               style={{ fontWeight: 900 }}
               onClick={() => setMobileOpen(false)}
@@ -151,17 +151,17 @@ export function Navbar() {
           ))}
           {loggedIn ? (
             <div className="mt-6 space-y-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#707072]">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                 管理后台
               </p>
               {adminNavItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 font-body text-sm font-medium text-[#111111] transition-colors hover:bg-[#F5F5F5]"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 font-body text-sm font-medium text-foreground transition-colors hover:bg-muted"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <item.icon size={16} className="text-[#707072]" />
+                  <item.icon size={16} className="text-muted-foreground" />
                   {item.title}
                 </Link>
               ))}
@@ -169,7 +169,7 @@ export function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="mt-8 flex h-12 items-center justify-center rounded-[30px] bg-[#111111] font-body text-sm font-medium text-white transition-colors hover:bg-[#292929]"
+              className="mt-8 flex h-12 items-center justify-center rounded-[30px] bg-primary font-body text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               onClick={() => setMobileOpen(false)}
             >
               登录
